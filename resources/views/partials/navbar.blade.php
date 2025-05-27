@@ -1,6 +1,11 @@
 <header class="bg-white shadow-sm py-4 sticky top-0 z-50">
     <div class="container mx-auto px-4 flex justify-between items-center">
-        <h1 class="text-2xl font-bold text-gray-800">Gunung Gambir</h1>
+        <h1 class="text-2xl font-bold text-gray-800">
+            <a href="{{ route('home') }}">
+                <img src="{{ asset('images/logo_war.png') }}" alt="Gunung Gambir" class="h-10 w-auto">
+            </a>
+        </h1>
+
         <nav class="hidden md:flex space-x-8 items-center">
             <a href="{{ route('home') }}" class="nav-link font-medium {{ request()->routeIs('home') ? 'text-green-600' : 'text-gray-600' }}">Beranda</a>
             <a href="{{ route('about') }}" class="nav-link font-medium {{ request()->routeIs('about') ? 'text-green-600' : 'text-gray-600' }}">Tentang Kami</a>
