@@ -53,18 +53,13 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     Route::get('/admin/artikel/data', [ArtikelController::class, 'data'])->name('artikel.data');
 
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-
     Route::resource('produk', ProdukController::class);
+    
     Route::resource('galeri', GaleriController::class);
-    // Route::resource('deteksi', DeteksiController::class)->only(['index', 'show']);
 
+    // Route::resource('deteksi', DeteksiController::class)->only(['index', 'show']);
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-    Route::resource('artikel', ArtikelController::class)->except(['show']);
-    Route::resource('produk', ProdukController::class)->except(['show']);
-    Route::resource('deteksi', DeteksiController::class)->except(['show']);
-    Route::resource('galeri', GaleriController::class)->except(['show']);
-    Route::resource('pengguna', PenggunaController::class)->except(['show']);
+
     Route::resource('penyakit', \App\Http\Controllers\PenyakitController::class)->except(['show']);
 });
 
