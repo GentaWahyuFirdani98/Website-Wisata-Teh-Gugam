@@ -1,4 +1,6 @@
 @extends('layouts.admin')
+@section('title', 'Galeri')
+
 
 @section('content')
 <div class="p-6">

@@ -1,4 +1,6 @@
 @extends('layouts.admin')
+@section('title', 'Produk')
+
 
 @section('content')
 <div class="p-6">
