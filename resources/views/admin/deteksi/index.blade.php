@@ -23,7 +23,7 @@
                     <td class="px-6 py-4">{{ $deteksi->jenisPenyakit->nama_penyakit }}</td>
                     <td class="px-6 py-4">{{ $deteksi->confidence * 100 }}%</td>
                     <td class="px-6 py-4">
-                        <a href="{{ route('deteksi.show', $deteksi->id) }}" class="text-blue-600 hover:text-blue-800">
+                        <a href="{{ route('admin.deteksi.show', $deteksi->id) }}" class="text-blue-600 hover:text-blue-800">
                             <i class="fas fa-eye"></i> Detail
                         </a>
                     </td>

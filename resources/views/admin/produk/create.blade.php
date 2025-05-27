@@ -6,7 +6,7 @@
 <div class="p-6">
     <h1 class="text-2xl font-bold mb-6">Tambah Produk Baru</h1>
 
-    <form action="{{ route('produk.store') }}" method="POST" enctype="multipart/form-data" class="bg-white rounded-lg shadow p-6">
+    <form action="{{ route('admin.produk.store') }}" method="POST" enctype="multipart/form-data" class="bg-white rounded-lg shadow p-6">
         @csrf
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

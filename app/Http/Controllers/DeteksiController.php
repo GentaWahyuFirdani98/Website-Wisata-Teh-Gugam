@@ -16,23 +16,20 @@ class DeteksiController extends Controller
     // ===== Untuk User =====
     public function index()
     {
-        return view('deteksi');
+        if(auth()->user()->role == 'admin'){
+            $deteksis = DeteksiDaunTeh::with(['user', 'jenisPenyakit'])
+                ->latest()
+                ->paginate(10);
+            return view('admin.deteksi.index', compact('deteksis'));
+        } else {
+            return view('deteksi');
+        }
     }
 
     public function process(Request $request)
     {
         // Logika deteksi penyakit di sini
         return back()->with('success', 'Deteksi berhasil diproses');
-    }
-
-    // ===== Untuk Admin =====
-    public function adminIndex()
-    {
-        $deteksis = DeteksiDaunTeh::with(['user', 'jenisPenyakit'])
-            ->latest()
-            ->paginate(10);
-
-        return view('admin.deteksi.index', compact('deteksis'));
     }
 
     public function show(DeteksiDaunTeh $deteksi)

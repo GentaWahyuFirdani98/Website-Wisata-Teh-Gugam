@@ -31,10 +31,10 @@ class ArtikelController extends Controller
         return datatables()->of($artikels)
             ->addColumn('action', function($artikel) {
                 return '
-                    <a href="'.route('artikel.edit', $artikel->id).'" class="text-blue-600 hover:text-blue-800 mr-3">
+                    <a href="'.route('admin.artikel.edit', $artikel->id).'" class="text-blue-600 hover:text-blue-800 mr-3">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <form action="'.route('artikel.destroy', $artikel->id).'" method="POST" class="inline" onsubmit="return confirm(\'Yakin hapus artikel?\')">
+                    <form action="'.route('admin.artikel.destroy', $artikel->id).'" method="POST" class="inline" onsubmit="return confirm(\'Yakin hapus artikel?\')">
                         '.csrf_field().'
                         '.method_field('DELETE').'
                         <button type="submit" class="text-red-600 hover:text-red-800">
@@ -74,7 +74,7 @@ class ArtikelController extends Controller
 
         Artikel::create($data);
 
-        return redirect()->route('artikel.index')->with('success', 'Artikel berhasil ditambahkan');
+        return redirect()->route('admin.artikel.index')->with('success', 'Artikel berhasil ditambahkan');
     }
 
     public function edit(Artikel $artikel)
@@ -103,7 +103,7 @@ class ArtikelController extends Controller
 
         $artikel->update($data);
 
-        return redirect()->route('artikel.index')
+        return redirect()->route('admin.artikel.index')
             ->with('success', 'Artikel berhasil diperbarui');
     }
 
@@ -113,7 +113,7 @@ class ArtikelController extends Controller
             Storage::disk('public')->delete($artikel->foto);
         }
         $artikel->delete();
-        return redirect()->route('artikel.index')->with('success', 'Artikel berhasil dihapus');
+        return redirect()->route('admin.artikel.index')->with('success', 'Artikel berhasil dihapus');
     }
 
 

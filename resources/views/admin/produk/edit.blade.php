@@ -6,7 +6,7 @@
 <div class="p-6">
     <h1 class="text-2xl font-bold mb-6">Edit Produk</h1>
 
-    <form action="{{ route('produk.update', $produk->id) }}" method="POST" enctype="multipart/form-data" class="bg-white rounded-lg shadow p-6">
+    <form action="{{ route('admin.produk.update', $produk->id) }}" method="POST" enctype="multipart/form-data" class="bg-white rounded-lg shadow p-6">
         @csrf
         @method('PUT')
         
@@ -61,7 +61,7 @@
         </div>
 
         <div class="flex justify-end space-x-4">
-            <a href="{{ route('produk.index') }}" class="bg-gray-200 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-300">
+            <a href="{{ route('admin.produk.index') }}" class="bg-gray-200 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-300">
                 Batal
             </a>
             <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700">

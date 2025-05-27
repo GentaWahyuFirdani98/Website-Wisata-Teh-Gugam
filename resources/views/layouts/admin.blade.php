@@ -40,31 +40,31 @@
             <nav class="p-4">
                 <ul class="space-y-2">
                     <li>
-                        <a href="{{ route('dashboard') }}" class="flex items-center p-2 rounded hover:bg-green-700 {{ request()->routeIs('admin.dashboard') ? 'bg-green-700' : '' }}">
+                        <a href="{{ route('admin.dashboard') }}" class="flex items-center p-2 rounded hover:bg-green-700 {{ request()->routeIs('admin.dashboard') ? 'bg-green-700' : '' }}">
                             <i class="fas fa-tachometer-alt mr-3 w-5 text-center"></i>
                             Dashboard
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('artikel.index') }}" class="flex items-center p-2 rounded hover:bg-green-700 {{ request()->routeIs('artikel.*') ? 'bg-green-700' : '' }}">
+                        <a href="{{ route('admin.artikel.index') }}" class="flex items-center p-2 rounded hover:bg-green-700 {{ request()->routeIs('artikel.*') ? 'bg-green-700' : '' }}">
                             <i class="fas fa-newspaper mr-3 w-5 text-center"></i>
                             Artikel
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('produk.index') }}" class="flex items-center p-2 rounded hover:bg-green-700 {{ request()->routeIs('produk.*') ? 'bg-green-700' : '' }}">
+                        <a href="{{ route('admin.produk.index') }}" class="flex items-center p-2 rounded hover:bg-green-700 {{ request()->routeIs('produk.*') ? 'bg-green-700' : '' }}">
                             <i class="fas fa-box-open mr-3 w-5 text-center"></i>
                             Produk
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('deteksi.index') }}" class="flex items-center p-2 rounded hover:bg-green-700 {{ request()->routeIs('deteksi.*') ? 'bg-green-700' : '' }}">
+                        <a href="{{ route('admin.deteksi.index') }}" class="flex items-center p-2 rounded hover:bg-green-700 {{ request()->routeIs('deteksi.*') ? 'bg-green-700' : '' }}">
                             <i class="fas fa-leaf mr-3 w-5 text-center"></i>
                             Deteksi Daun
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('galeri.index') }}" class="flex items-center p-2 rounded hover:bg-green-700 {{ request()->routeIs('galeri.*') ? 'bg-green-700' : '' }}">
+                        <a href="{{ route('admin.galeri.index') }}" class="flex items-center p-2 rounded hover:bg-green-700 {{ request()->routeIs('galeri.*') ? 'bg-green-700' : '' }}">
                             <i class="fas fa-images mr-3 w-5 text-center"></i>
                             Galeri
                         </a>

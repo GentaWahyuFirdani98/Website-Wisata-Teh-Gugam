@@ -51,7 +51,7 @@ class GaleriController extends Controller
             'user_id' => auth()->id()
         ]);
 
-        return redirect()->route('galeri.index')->with('success', 'Foto berhasil diupload!');
+        return redirect()->route('admin.galeri.index')->with('success', 'Foto berhasil diupload!');
     }
 
     public function edit(Galeri $galeri)
@@ -76,13 +76,13 @@ class GaleriController extends Controller
 
         $galeri->update($data);
 
-        return redirect()->route('galeri.index')->with('success', 'Foto berhasil diperbarui');
+        return redirect()->route('admin.galeri.index')->with('success', 'Foto berhasil diperbarui');
     }
 
     public function destroy(Galeri $galeri)
     {
         Storage::disk('public')->delete($galeri->foto);
         $galeri->delete();
-        return redirect()->route('galeri.index')->with('success', 'Foto berhasil dihapus');
+        return redirect()->route('admin.galeri.index')->with('success', 'Foto berhasil dihapus');
     }
 }

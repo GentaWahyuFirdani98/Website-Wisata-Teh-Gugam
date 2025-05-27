@@ -24,14 +24,16 @@ Route::get('/artikel', fn() => view('artikel'))->name('artikel');
 // ========================
 Route::middleware(['auth'])->group(function () {
     Route::get('/deteksi', [DeteksiController::class, 'index'])->name('deteksi');
-    Route::post('/deteksi', [DeteksiController::class, 'process'])->name('deteksi.process');
 });
 // ========================
 // Admin Routes (Login + Role Admin)
 // ========================
-Route::middleware(['auth'])->prefix('admin')->group(function () {
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
         // Dashboard
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+    Route::get('/deteksi', [DeteksiController::class, 'index'])->name('deteksi.index');
+    Route::get('/deteksi/{deteksi}', [DeteksiController::class, 'show'])->name('deteksi.show');
     
     // Artikel
     Route::resource('artikel', ArtikelController::class)->except(['show']);

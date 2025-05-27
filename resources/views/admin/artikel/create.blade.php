@@ -6,7 +6,7 @@
 <div class="p-6">
     <h1 class="text-2xl font-bold mb-6">Tambah Artikel Baru</h1>
 
-    <form action="{{ route('artikel.store') }}" method="POST" enctype="multipart/form-data" class="bg-white rounded-lg shadow p-6">
+    <form action="{{ route('admin.artikel.store') }}" method="POST" enctype="multipart/form-data" class="bg-white rounded-lg shadow p-6">
         @csrf
         
         <div class="mb-4">

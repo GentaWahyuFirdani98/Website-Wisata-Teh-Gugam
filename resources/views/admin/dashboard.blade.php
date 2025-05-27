@@ -63,9 +63,9 @@
         <!-- Quick Actions -->
         <div class="space-y-4">
             @foreach([
-                ['icon' => 'plus-circle', 'color' => 'green', 'route' => 'artikel.create', 'label' => 'Tambah Artikel', 'desc' => 'Buat konten baru'],
-                ['icon' => 'shopping-bag', 'color' => 'blue', 'route' => 'produk.create', 'label' => 'Tambah Produk', 'desc' => 'Tambahkan produk wisata'],
-                ['icon' => 'camera', 'color' => 'pink', 'route' => 'galeri.create', 'label' => 'Upload Galeri', 'desc' => 'Tambahkan foto wisata'],
+                ['icon' => 'plus-circle', 'color' => 'green', 'route' => 'admin.artikel.create', 'label' => 'Tambah Artikel', 'desc' => 'Buat konten baru'],
+                ['icon' => 'shopping-bag', 'color' => 'blue', 'route' => 'admin.produk.create', 'label' => 'Tambah Produk', 'desc' => 'Tambahkan produk wisata'],
+                ['icon' => 'camera', 'color' => 'pink', 'route' => 'admin.galeri.create', 'label' => 'Upload Galeri', 'desc' => 'Tambahkan foto wisata'],
             ] as $action)
             <a href="{{ route($action['route']) }}" class="block bg-white rounded-lg shadow p-6 hover:shadow-md transition flex items-center">
                 <div class="p-3 rounded-full bg-{{ $action['color'] }}-100 text-{{ $action['color'] }}-600 mr-4">
