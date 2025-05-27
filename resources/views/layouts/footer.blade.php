@@ -17,7 +17,7 @@
             <li><a href="{{ route('galeri') }}" class="footer-link text-gray-300 inline-block">Galeri</a></li>
             <li><a href="{{ route('artikel') }}" class="footer-link text-gray-300 inline-block">Artikel</a></li>
             <li><a href="{{ route('produk') }}" class="footer-link text-gray-300 inline-block">Produk</a></li>
-            <li><a href="{{ route('deteksi') }}" class="footer-link text-gray-300 inline-block">Deteksi Penyakit</a></li>
+
           </ul>
         </div>
 
