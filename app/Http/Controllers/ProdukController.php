@@ -21,49 +21,6 @@ class ProdukController extends Controller
         return view('admin.produk.create', compact('jenisProduk'));
     }
 
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'nama_produk' => 'required|max:255',
-    //         'jenis_produk' => 'required|in:villa,kuliner,meeting_room,camping_ground',
-    //         'harga' => 'required|numeric|min:0',
-    //         'deskripsi' => 'nullable',
-    //         'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-    //     ]);
-
-    //     $data = $request->except('foto');
-    //     $data['slug'] = Str::slug($request->nama_produk);
-    //     $data['user_id'] = auth()->id();
-    //     $data['foto'] = $request->file('foto')->store('produk', 'public');
-
-    //     KatalogProduk::create($data);
-
-    //     return redirect()->route('admin.produk.index')->with('success', 'Produk berhasil ditambahkan');
-    // }
-
-    // public function store(Request $request)
-    // {
-    //     $validated = $request->validate([
-    //         'nama_produk' => 'required|max:255',
-    //         'jenis_produk' => 'required|in:villa,kuliner,meeting_room,camping_ground',
-    //         'harga' => 'required|numeric|min:0',
-    //         'deskripsi' => 'nullable',
-    //         'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-    //     ]);
-
-    //     KatalogProduk::create([
-    //         'nama_produk' => $validated['nama_produk'],
-    //         'slug' => Str::slug($validated['nama_produk']),
-    //         'jenis_produk' => $validated['jenis_produk'],
-    //         'harga' => $validated['harga'],
-    //         'deskripsi' => $validated['deskripsi'],
-    //         'foto' => $request->file('foto')->store('produk', 'public'),
-    //         'user_id' => auth()->id()
-    //     ]);
-
-    //     return redirect()->route('admin.produk.index')->with('success', 'Produk berhasil ditambahkan!');
-    // }
-
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -74,7 +31,7 @@ class ProdukController extends Controller
             'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        // Slug akan otomatis dibuat oleh model
+        // Slug
         KatalogProduk::create([
             'nama_produk' => $validated['nama_produk'],
             'jenis_produk' => $validated['jenis_produk'],

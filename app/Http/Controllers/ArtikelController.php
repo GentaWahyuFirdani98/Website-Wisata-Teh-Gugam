@@ -19,11 +19,6 @@ class ArtikelController extends Controller
         return view('admin.artikel.index', compact('artikels'));
     }
 
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
     public function data()
     {
         $artikels = Artikel::with('user')->select('artikels.*');

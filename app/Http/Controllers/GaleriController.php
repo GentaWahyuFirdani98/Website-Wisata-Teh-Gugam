@@ -19,23 +19,6 @@ class GaleriController extends Controller
         return view('admin.galeri.create');
     }
 
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'judul' => 'required|max:255',
-    //         'deskripsi' => 'nullable',
-    //         'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-    //     ]);
-
-    //     $data = $request->except('foto');
-    //     $data['user_id'] = auth()->id();
-    //     $data['foto'] = $request->file('foto')->store('galeri', 'public');
-
-    //     Galeri::create($data);
-
-    //     return redirect()->route('galeri.index')->with('success', 'Foto berhasil ditambahkan');
-    // }
-
     public function store(Request $request)
     {
         $validated = $request->validate([
