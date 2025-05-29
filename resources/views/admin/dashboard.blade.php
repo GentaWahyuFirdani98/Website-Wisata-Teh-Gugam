@@ -16,9 +16,9 @@
     <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
         @foreach([
             ['icon' => 'newspaper', 'color' => 'blue', 'label' => 'Artikel', 'value' => $stats['artikel']],
-            ['icon' => 'box-open', 'color' => 'green', 'label' => 'Produk', 'value' => $stats['produk']],
-            ['icon' => 'leaf', 'color' => 'yellow', 'label' => 'Deteksi', 'value' => $stats['deteksi']],
-            ['icon' => 'users', 'color' => 'purple', 'label' => 'Pengguna', 'value' => $stats['pengguna']],
+            ['icon' => 'box-open', 'color' => 'red', 'label' => 'Produk', 'value' => $stats['produk']],
+            ['icon' => 'leaf', 'color' => 'green', 'label' => 'Deteksi', 'value' => $stats['deteksi']],
+            ['icon' => 'users', 'color' => 'black', 'label' => 'Pengguna', 'value' => $stats['pengguna']],
             ['icon' => 'images', 'color' => 'pink', 'label' => 'Galeri', 'value' => $stats['galeri']]
         ] as $card)
         <div class="bg-white rounded-lg shadow p-6 border-l-4 border-{{ $card['color'] }}-500">
@@ -63,8 +63,8 @@
         <!-- Quick Actions -->
         <div class="space-y-4">
             @foreach([
-                ['icon' => 'plus-circle', 'color' => 'green', 'route' => 'admin.artikel.create', 'label' => 'Tambah Artikel', 'desc' => 'Buat konten baru'],
-                ['icon' => 'shopping-bag', 'color' => 'blue', 'route' => 'admin.produk.create', 'label' => 'Tambah Produk', 'desc' => 'Tambahkan produk wisata'],
+                ['icon' => 'plus-circle', 'color' => 'blue', 'route' => 'admin.artikel.create', 'label' => 'Tambah Artikel', 'desc' => 'Buat konten baru'],
+                ['icon' => 'shopping-bag', 'color' => 'red', 'route' => 'admin.produk.create', 'label' => 'Tambah Produk', 'desc' => 'Tambahkan produk wisata'],
                 ['icon' => 'camera', 'color' => 'pink', 'route' => 'admin.galeri.create', 'label' => 'Upload Galeri', 'desc' => 'Tambahkan foto wisata'],
             ] as $action)
             <a href="{{ route($action['route']) }}" class="block bg-white rounded-lg shadow p-6 hover:shadow-md transition flex items-center">

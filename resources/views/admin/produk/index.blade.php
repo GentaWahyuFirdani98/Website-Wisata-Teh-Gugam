@@ -51,7 +51,7 @@
                         <td class="px-6 py-4 whitespace-nowrap">
                             Rp {{ number_format($produk->harga, 0, ',', '.') }}
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <td class="px-6 py-4">
                             <a href="{{ route('admin.produk.edit', $produk->id) }}" class="text-blue-600 hover:text-blue-900 mr-3">
                                 <i class="fas fa-edit"></i> Edit
                             </a>

@@ -11,8 +11,8 @@ class PengunjungSeeder extends Seeder
     public function run()
     {
         User::create([
-            'nama' => 'Haikal',
-            'email' => 'haikal@mail.com',
+            'nama' => 'danar',
+            'email' => 'danar@mail.com',
             'password' => Hash::make('1'),
             'role' => 'pengunjung',
         ]);
