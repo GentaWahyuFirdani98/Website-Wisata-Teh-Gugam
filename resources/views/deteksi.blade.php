@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Deteksi Penyakit - Kebun Teh Gunung Gambir')
+@section('title', 'Deteksi Penyakit')
 
 
 @section('content')

@@ -19,9 +19,9 @@ Route::get('/produk', fn() => view('produk'))->name('produk');
 Route::get('/artikel', fn() => view('artikel'))->name('artikel');
 
 // ========================
-// User Routes (Login Dulu)
+// Pengunjung Routes (Login Dulu)
 // ========================
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'pengunjung'])->group(function () {
     Route::get('/deteksi', [DeteksiController::class, 'index'])->name('deteksi');
 });
 

@@ -12,7 +12,8 @@
             <a href="{{ route('galeri') }}" class="nav-link font-medium {{ request()->routeIs('galeri') ? 'text-green-600' : 'text-gray-600' }}">Galeri</a>
             <a href="{{ route('artikel') }}" class="nav-link font-medium {{ request()->routeIs('artikel') ? 'text-green-600' : 'text-gray-600' }}">Artikel</a>
             <a href="{{ route('produk') }}" class="nav-link font-medium {{ request()->routeIs('produk') ? 'text-green-600' : 'text-gray-600' }}">Produk</a>
-            
+            <a href="{{ route('deteksi') }}" class="nav-link font-medium {{ request()->routeIs('deteksi') ? 'text-green-600' : 'text-gray-600' }}">Deteksi Daun</a>
+
             @auth
             <div class="flex items-center space-x-4 ml-4">
                 <span class="text-gray-600">{{ Auth::user()->name }}</span>

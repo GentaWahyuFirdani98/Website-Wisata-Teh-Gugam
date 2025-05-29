@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Kebun Teh Gunung Gambir')
+@section('title', 'Beranda')
 
 @section('content')
     <!-- Hero Section -->
