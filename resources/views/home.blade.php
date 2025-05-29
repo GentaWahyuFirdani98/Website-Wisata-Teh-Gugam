@@ -132,9 +132,9 @@
                 </div>
                 
                 <div class="flex flex-col items-center justify-center">
-                    <p class="text-gray-700 mb-6 text-center">Kunjungi Kebun Teh Gunung Gambir yang terletak di koordinat -8.035191, 113.441574. Nikmati pemandangan alam yang menakjubkan dan udara segar pegunungan.</p>
+                    <p class="text-gray-700 mb-6 text-center">Nikmati pemandangan alam yang menakjubkan dan udara segar pegunungan di Kebun Teh Gunung Gambir, yang beralamat lengkap di Lanasan RT 03, RW 023, Gelang, Kecamatan Sumberbaru, Kabupaten Jember, Jawa Timur 68156.</p>
                     <a 
-                        href="https://maps.google.com/?q=-8.035191,113.441574" 
+                        href="https://maps.app.goo.gl/xC7dBMtNRzkukk2B9" 
                         target="_blank" 
                         class="bg-green-600 hover:bg-green-700 text-white font-medium py-4 px-8 rounded-lg transition duration-300 w-full max-w-xs text-center flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">

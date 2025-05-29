@@ -24,9 +24,9 @@
         <div class="text-center md:text-left">
           <h4 class="text-lg font-semibold mb-3">Hubungi Kami</h4>
           <address class="text-gray-300 not-italic space-y-2">
-            <p>Jl. Raya Gunung Gambir, Jember, Jawa Timur, Indonesia</p>
-            <p>+62 123 4567 890</p>
-            <p>info@kebuntehgambir.id</p>
+            <p>Lanasan Rt 03, RW.023, Gelang, Kec. Sumberbaru, Kabupaten Jember, Jawa Timur 68156</p>
+            <p>082333958479</p>
+            <p>@wisatagununggambir</p>
           </address>
         </div>
       </div>
