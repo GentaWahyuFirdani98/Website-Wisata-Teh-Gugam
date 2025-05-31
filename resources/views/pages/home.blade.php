@@ -4,7 +4,39 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section class="hero-section h-screen flex items-center justify-center text-white">
+    <section class="hero-section h-screen flex items-center justify-center text-white relative">
+        <!-- Tombol Kamera -->
+         @auth
+    <form action="{{ route('deteksi.upload.camera') }}" method="POST" enctype="multipart/form-data" id="camera-form">
+        @csrf
+        <input type="file"
+               name="gambar"
+               id="camera-input"
+               accept="image/*"
+               capture="environment"
+               onchange="document.getElementById('camera-form').submit()"
+               style="display: none;">
+    </form>
+
+    <a href="#" onclick="document.getElementById('camera-input').click(); return false;"
+       class="fixed bottom-6 right-6 z-50 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition">
+        <img src="{{ asset('images/camera.png') }}" alt="Kamera"
+             class="w-8 h-8 md:w-10 md:h-10 object-contain">
+    </a>
+@else
+    <!-- <a href="{{ route('login') }}"
+       class="fixed bottom-6 right-6 z-50 bg-green-600 text-white font-bold py-3 px-5 rounded-full shadow-lg hover:bg-green-700 transition">
+        Login untuk Kamera
+    </a> -->
+    <a href="{{ route('login') }}"
+       class="fixed bottom-6 right-6 z-50 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition">
+        <img src="{{ asset('images/camera.png') }}" alt="Kamera"
+             class="w-8 h-8 md:w-10 md:h-10 object-contain">
+    </a>
+@endauth
+
+
+
         <div class="container mx-auto px-4 text-center">
             <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
                 Selamat Datang di Kebun Teh Gunung Gambir
@@ -209,6 +241,23 @@
             </div>
         </div>
     </section>
+
+<!-- Hidden Camera Input and Auto Submit Form -->
+<!-- <form action="{{ route('deteksi.upload.camera') }}" method="POST" enctype="multipart/form-data" id="camera-form">
+    @csrf
+    <input type="file"
+           name="gambar"
+           id="camera-input"
+           accept="image/*"
+           capture="environment"
+           onchange="document.getElementById('camera-form').submit()"
+           style="display: none;">
+</form>
+ -->
+
+
+
+
 @endsection
 
 @push('styles')

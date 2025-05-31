@@ -16,15 +16,17 @@ class DeteksiController extends Controller
     // ===== Untuk User =====
     public function index()
     {
-        if(auth()->user()->role == 'admin'){
+        if (auth()->user()->role == 'admin') {
             $deteksis = DeteksiDaunTeh::with(['user', 'jenisPenyakit'])
                 ->latest()
                 ->paginate(10);
             return view('admin.deteksi.index', compact('deteksis'));
         } else {
-            return view('deteksi');
+            $gambar = session('gambar'); // ambil dari session flash
+            return view('user.deteksi.deteksi', compact('gambar'));
         }
     }
+
 
     public function process(Request $request)
     {
@@ -36,4 +38,34 @@ class DeteksiController extends Controller
     {
         return view('admin.deteksi.show', compact('deteksi'));
     }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'gambar' => 'required|image|mimes:jpeg,jpg,png|max:2048',
+        ]);
+
+        // Simpan gambar ke folder storage/app/public/deteksi
+        $path = $request->file('gambar')->store('public/deteksi');
+
+        // Ambil nama file
+        $filename = basename($path);
+
+        // Redirect ke halaman deteksi + tampilkan nama file
+        return view('user.deteksi.index', ['gambar' => $filename]);
+    }
+
+    public function uploadFromCamera(Request $request)
+{
+    $request->validate([
+        'gambar' => 'required|image|max:5120', // 5MB
+    ]);
+
+    $path = $request->file('gambar')->store('deteksi', 'public');
+    $filename = basename($path);
+
+    // Redirect ke route deteksi (GET /deteksi), bawa nama gambar via session
+    return redirect()->route('deteksi')->with('gambar', $filename);
+}
+
 }

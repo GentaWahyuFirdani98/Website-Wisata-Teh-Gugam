@@ -49,6 +49,18 @@
         <div class="flex-1">
             <div class="bg-white rounded-xl shadow-md p-6 h-full">
                 <h2 class="text-xl md:text-2xl font-bold mb-4 text-green-700">Upload Gambar</h2>
+                @if(session('success'))
+                    <p class="text-green-500">{{ session('success') }}</p>
+                @endif
+                @if(session('gambar'))
+    <div class="mt-4 text-center">
+        <p class="font-medium mb-2">📷 Gambar dari Kamera:</p>
+        <img src="{{ asset('storage/deteksi/' . session('gambar')) }}" alt="Gambar Deteksi"
+             class="w-full max-w-md mx-auto rounded shadow">
+    </div>
+@endif
+
+
                 <div id="dropzone" class="upload-area w-full h-64 border-2 border-dashed border-gray-300 rounded-lg p-6 flex flex-col items-center justify-center cursor-pointer">
                     <input type="file" id="imageInput" class="hidden" accept="image/*">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
