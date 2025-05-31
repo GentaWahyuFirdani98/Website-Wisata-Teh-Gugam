@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\{
     AdminController,
     ArtikelController,
@@ -59,6 +60,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::resource('produk', ProdukController::class);
     Route::resource('deteksi', DeteksiController::class);
     Route::resource('galeri', GaleriController::class);
+    Route::get('/', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/update', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 // ========================

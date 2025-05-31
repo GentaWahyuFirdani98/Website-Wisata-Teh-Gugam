@@ -74,7 +74,7 @@
                 </ul>
             </nav>
             
-            <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-green-700 bg-green-900">
+            <!-- <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-green-700 bg-green-900">
                 <div class="flex items-center">
                     <div class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center text-lg font-bold">
                         {{ substr(auth()->user()->nama, 0, 1) }}
@@ -91,7 +91,46 @@
                         Keluar
                     </button>
                 </form>
+            </div> -->
+
+            <!-- <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-green-700 bg-green-900">
+                <a href="{{ route('admin.profile.show') }}" class="flex items-center mb-4 hover:text-gray-300">
+                    <div class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center text-lg font-bold">
+                        {{ strtoupper(substr(auth()->user()->nama, 0, 1)) }}
+                    </div>
+                    <div>
+                        <p class="font-medium">{{ auth()->user()->nama }}</p>
+                        <p class="text-xs text-green-300 capitalize">{{ auth()->user()->role }}</p>
+                    </div>
+                </a>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="flex items-center w-full p-2 rounded hover:bg-green-800 text-green-300">
+                        <i class="fas fa-sign-out-alt mr-3"></i>
+                        Keluar
+                    </button>
+                </form>
+            </div> -->
+
+            <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-green-700 bg-green-900">
+                <a href="{{ route('admin.profile.show') }}" class="flex items-center mb-4 hover:text-gray-300">
+                    <div class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center text-lg font-bold">
+                        {{ strtoupper(substr(auth()->user()->nama, 0, 1)) }}
+                    </div>
+                    <div class="ml-3">
+                        <p class="font-medium">{{ auth()->user()->nama }}</p>
+                        <p class="text-xs text-green-300 capitalize">{{ auth()->user()->role }}</p>
+                    </div>
+                </a>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="flex items-center w-full p-2 rounded hover:bg-green-800 text-green-300">
+                        <i class="fas fa-sign-out-alt mr-3"></i>
+                        Keluar
+                    </button>
+                </form>
             </div>
+
         </div>
         
         <!-- Main Content -->
