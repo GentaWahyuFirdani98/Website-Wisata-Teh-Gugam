@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -44,4 +45,47 @@ class ProfileController extends Controller
 
         return redirect()->route('admin.profile.show')->with('success', 'Profil berhasil diperbarui');
     }
+
+    /**
+     * Delete the user's account.
+     */
+    public function destroy(Request $request): RedirectResponse
+    {
+        $request->validateWithBag('userDeletion', [
+            'password' => ['required', 'current_password'],
+        ]);
+
+        $user = $request->user();
+
+        Auth::logout();
+
+        $user->delete();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return Redirect::to('/');
+    }
+
+     public function index()
+    {
+        $user = Auth::user();
+        // $riwayat = Deteksi::where('user_id', $user->id)->latest()->get();
+
+        return view('user.profile.profile', compact('user'));
+    }
+
+    public function updateNama(Request $request)
+    {
+        $request->validate([
+            'nama' => 'required|string|max:255',
+        ]);
+
+        $user = auth()->user();
+        $user->nama = $request->nama;
+        $user->save();
+
+        return redirect()->route('profile')->with('success', 'Nama berhasil diperbarui.');
+    }
+
 }

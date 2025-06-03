@@ -150,9 +150,10 @@
     const deleteImageBtn = document.getElementById('deleteImageBtn');
 
     // Handle click on dropzone
-    dropzone.addEventListener('click', () => {
-        imageInput.click();
-    });
+    // dropzone.addEventListener('click', () => {
+    //     imageInput.click();
+    // });
+    
 
     // Handle drag over
     dropzone.addEventListener('dragover', (e) => {
@@ -258,7 +259,7 @@
             console.error('Error:', error);
             hasilDeteksi.innerHTML = `
                 <div class="p-4 bg-red-50 rounded-lg border border-red-200">
-                    <h3 class="font-bold text-red-700">⚠️ Error</h3>
+                    <h3 class="font-bold text-red-700">⚠ Error</h3>
                     <p class="mt-2">Gagal melakukan deteksi. Pastikan:</p>
                     <ul class="list-disc pl-5 mt-1 space-y-1">
                         <li>Gambar yang diupload jelas</li>
@@ -272,7 +273,7 @@
 
     function displayDetectionResult(result) {
         if (result.error) {
-            hasilDeteksi.innerHTML = `<div class="text-red-500 text-center">Error: ${result.error}</div>`;
+            hasilDeteksi.innerHTML = <div class="text-red-500 text-center">Error: ${result.error}</div>;
         } else if (result.status === "Healthy") {
             hasilDeteksi.innerHTML = `
                 <div class="space-y-4">

@@ -21,6 +21,8 @@ Route::get('/produk', fn() => view('pages.produk'))->name('produk');
 Route::get('/galeri', fn() => view('user.galeri.galeri'))->name('galeri');
 Route::get('/artikel', fn() => view('user.artikel.artikel'))->name('artikel');
 
+
+
 // ========================
 // Register Routes - Override Breeze
 // ========================
@@ -50,6 +52,8 @@ Route::middleware(['auth', 'pengunjung'])->group(function () {
     Route::post('/deteksi-upload', [DeteksiController::class, 'uploadFromCamera'])->name('deteksi.upload.camera');
 });
 
+Route::middleware('auth')->get('/profile', [ProfileController::class, 'index'])->name('profile');
+Route::put('/profil/update-nama', [ProfileController::class, 'updateNama'])->name('profile.update.nama');
 
 // ========================
 // Admin Routes (Login + Role Admin) – TIDAK DIUBAH

@@ -14,7 +14,7 @@
             <a href="{{ route('produk') }}" class="nav-link font-medium {{ request()->routeIs('produk') ? 'text-green-600' : 'text-gray-600' }}">Produk</a>
             <a href="{{ route('deteksi') }}" class="nav-link font-medium {{ request()->routeIs('deteksi') ? 'text-green-600' : 'text-gray-600' }}">Deteksi Daun</a>
 
-            @auth
+            <!-- @auth
             <div class="flex items-center space-x-4 ml-4">
                 <span class="text-gray-600">{{ Auth::user()->name }}</span>
                 <form method="POST" action="{{ route('logout') }}">
@@ -27,7 +27,24 @@
                 <a href="{{ route('login') }}" class="text-gray-600 hover:text-green-600">Login</a>
                 <a href="{{ route('register') }}" class="text-gray-600 hover:text-green-600">Register</a>
             </div>
-            @endauth
+            @endauth -->
+            
+@auth
+    <!-- Jika sudah login, tampilkan foto + nama -->
+    <a href="{{ route('profile') }}" class="flex items-center space-x-3 ml-4 hover:opacity-90 transition">
+        <img src="{{ asset('images/person.jpg') }}" alt="User Photo" class="w-8 h-8 rounded-full border border-gray-300">
+        <span class="text-gray-800 font-medium">{{ Auth::user()->nama }}</span>
+    </a>
+@else
+    <!-- Kalau belum login, tampilkan tombol Login & Register -->
+    <div class="flex items-center space-x-4 ml-4">
+        <a href="{{ route('login') }}" class="text-gray-600 hover:text-green-600">Login</a>
+        <a href="{{ route('register') }}" class="text-gray-600 hover:text-green-600">Register</a>
+    </div>
+@endauth
+
+
+
         </nav>
         
         <!-- Mobile menu button -->
@@ -47,18 +64,18 @@
         <a href="{{ route('produk') }}" class="block py-2 text-gray-600 hover:text-green-600">Produk</a>
         
         @auth
-        <div class="border-t border-gray-200 mt-2 pt-2">
-            <span class="block py-2 text-gray-600">{{ Auth::user()->name }}</span>
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="block py-2 text-gray-600 hover:text-green-600 w-full text-left">Logout</button>
-            </form>
+        <div class="border-t border-gray-200 mt-4 pt-4 flex items-center space-x-3">
+            <a href="{{ route('profile') }}" class="flex items-center space-x-3 hover:opacity-90 transition w-full">
+                <img src="{{ asset('images/person.jpg') }}" class="w-8 h-8 rounded-full border border-gray-300" alt="User Photo">
+                <span class="text-gray-800 font-medium">{{ Auth::user()->nama }}</span>
+            </a>
         </div>
         @else
-        <div class="border-t border-gray-200 mt-2 pt-2">
-            <a href="{{ route('login') }}" class="block py-2 text-gray-600 hover:text-green-600">Login</a>
-            <a href="{{ route('register') }}" class="block py-2 text-gray-600 hover:text-green-600">Register</a>
+        <div class="border-t border-gray-200 mt-4 pt-4 flex flex-col space-y-2">
+            <a href="{{ route('login') }}" class="text-gray-600 hover:text-green-600">Login</a>
+            <a href="{{ route('register') }}" class="text-gray-600 hover:text-green-600">Register</a>
         </div>
         @endauth
+
     </div>
 </header>
