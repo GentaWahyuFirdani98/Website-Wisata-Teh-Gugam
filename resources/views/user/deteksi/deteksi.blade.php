@@ -96,6 +96,7 @@
                         <p>Hasil deteksi akan muncul di sini setelah Anda mengupload gambar</p>
                     </div>
                 </div>
+                
                 <div id="loadingSpinner" class="spinner"></div>
             </div>
         </div>
@@ -136,8 +137,31 @@
 </style>
 @endpush
 
+
+
 @push('scripts')
+
 <script>
+    const kualitas_deskripsi = {
+    "T1": "Kualitas terbaik. Daun masih sangat muda, berwarna hijau cerah, utuh, dan belum terbuka penuh. Cocok untuk teh premium dengan rasa dan aroma unggulan.",
+    "T2": "Kualitas bagus. Daun muda yang mulai membuka sedikit. Masih layak untuk teh berkualitas tinggi dengan sedikit penurunan rasa dan aroma dibanding T1.",
+    "T3": "Kualitas sedang. Daun sudah lebih terbuka dan usia sedikit lebih tua. Umumnya digunakan untuk produk teh standar atau campuran.",
+    "T4": "Kualitas rendah. Daun tua, bisa berwarna kusam atau ada sedikit kerusakan. Biasanya digunakan untuk teh massal atau kebutuhan industri."
+};
+
+const fakta_teh = [
+    "Semua jenis teh—hijau, hitam, putih, oolong—berasal dari satu tanaman yang sama: Camellia sinensis.",
+    "Kualitas terbaik daun teh dipetik dari pucuk dan dua daun muda di bawahnya.",
+    "Daun teh muda biasanya memiliki lebih banyak kafein dan antioksidan dibanding daun tua.",
+    "Kondisi lingkungan seperti ketinggian, curah hujan, dan suhu sangat memengaruhi kualitas daun teh.",
+    "Waktu terbaik untuk memetik daun teh adalah pagi hari saat embun masih menempel.",
+    "Proses pengolahan teh (seperti pengeringan dan fermentasi) menentukan jenis dan rasa teh.",
+    "Daun teh sehat memiliki warna hijau cerah dan tekstur yang utuh tanpa bercak.",
+    "Jamur dan penyakit pada daun teh bisa menurunkan kualitas hasil panen secara signifikan.",
+    "Teh mengandung L-theanine, zat alami yang membantu meningkatkan fokus dan ketenangan.",
+    "Pemrosesan yang salah, seperti pemetikan kasar atau penyimpanan lembap, bisa merusak mutu daun teh."
+];
+
     // Image Upload Functionality
     const dropzone = document.getElementById('dropzone');
     const imageInput = document.getElementById('imageInput');
@@ -242,18 +266,15 @@
             hasilDeteksi.innerHTML = '<div class="text-gray-500 h-full flex items-center justify-center"><p>Memproses gambar...</p></div>';
             
             // Simulate API call (replace with actual API call)
-            setTimeout(() => {
-                // This is a mock response - replace with actual API response
-                const mockResponse = {
-                    status: "Sick",
-                    penyakit: "Penyakit Blister Blight",
-                    confidence: 0.92,
-                    deskripsi: "Disebabkan oleh jamur Exobasidium vexans yang menyerang daun teh muda."
-                };
-                
-                displayDetectionResult(mockResponse);
-                loadingSpinner.style.display = 'none';
-            }, 2000);
+            const response = await fetch('http://127.0.0.1:8000/predict', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+            displayDetectionResult(result);
+            loadingSpinner.style.display = 'none';
+
             
         } catch (error) {
             console.error('Error:', error);
@@ -270,52 +291,70 @@
             loadingSpinner.style.display = 'none';
         }
     });
+function displayDetectionResult(result) {
+    const faktaRandom = fakta_teh[Math.floor(Math.random() * fakta_teh.length)];
+    const deskripsiKualitas = kualitas_deskripsi[result.kualitas] || '';
 
-    function displayDetectionResult(result) {
-        if (result.error) {
-            hasilDeteksi.innerHTML = <div class="text-red-500 text-center">Error: ${result.error}</div>;
-        } else if (result.status === "Healthy") {
-            hasilDeteksi.innerHTML = `
-                <div class="space-y-4">
-                    <div class="p-4 bg-green-50 rounded-lg border border-green-200">
-                        <h3 class="font-bold text-green-700">✅ Daun terdeteksi SEHAT</h3>
-                        <p class="mt-2">🌿 Kualitas: ${result.kualitas || 'Baik'}</p>
-                        <p class="mt-1">🔍 Tingkat Akurasi: ${(result.confidence * 100).toFixed(1)}%</p>
-                    </div>
-                    <div class="p-4 bg-blue-50 rounded-lg border border-blue-200">
-                        <h3 class="font-bold text-blue-700">Tips Perawatan:</h3>
-                        <ul class="list-disc pl-5 mt-1 space-y-1">
-                            <li>Lanjutkan perawatan rutin</li>
-                            <li>Pantau kondisi daun secara berkala</li>
-                            <li>Jaga kelembaban tanah yang optimal</li>
-                        </ul>
-                    </div>
-                </div>
-            `;
-        } else if (result.status === "Sick") {
-            hasilDeteksi.innerHTML = `
-                <div class="space-y-4">
-                    <div class="p-4 bg-red-50 rounded-lg border border-red-200">
-                        <h3 class="font-bold text-red-700">❗ Deteksi Penyakit</h3>
-                        <p class="mt-2">🦠 ${result.penyakit || 'Penyakit tidak diketahui'}</p>
-                        <p class="mt-1">🔍 Tingkat Akurasi: ${(result.confidence * 100).toFixed(1)}%</p>
-                    </div>
-                    <div class="p-4 bg-yellow-50 rounded-lg border border-yellow-200">
-                        <h3 class="font-bold text-yellow-700">Deskripsi:</h3>
-                        <p class="mt-1">${result.deskripsi || 'Tidak ada deskripsi tersedia'}</p>
-                    </div>
-                    <div class="p-4 bg-blue-50 rounded-lg border border-blue-200">
-                        <h3 class="font-bold text-blue-700">Solusi Penanganan:</h3>
-                        <ul class="list-disc pl-5 mt-1 space-y-1">
-                            <li>Gunakan fungisida yang sesuai</li>
-                            <li>Pangkas bagian yang terinfeksi</li>
-                            <li>Perbaiki drainase dan sirkulasi udara</li>
-                            <li>Pantau perkembangan tanaman</li>
-                        </ul>
-                    </div>
-                </div>
-            `;
-        }
+    if (result.error) {
+        hasilDeteksi.innerHTML = `
+            <div class="text-red-500 text-center">
+                ⚠ Error: ${result.error}
+            </div>`;
+        return;
     }
+
+    if (result.status === "Unknown") {
+        hasilDeteksi.innerHTML = `
+            <div class="p-4 bg-yellow-100 border border-yellow-300 rounded">
+                <h3 class="text-yellow-700 font-bold">Tidak Terdeteksi</h3>
+                <p class="mt-2">${result.message || 'Gambar tidak dikenali sebagai daun teh.'}</p>
+            </div>
+        `;
+        return;
+    }
+
+    if (result.status === "Healthy") {
+        hasilDeteksi.innerHTML = `
+            <div class="space-y-4">
+                <div class="p-4 bg-green-50 rounded-lg border border-green-200">
+                    <h3 class="font-bold text-green-700">✅ Daun Sehat</h3>
+                    <p class="mt-2">🌿 Kualitas: ${result.kualitas || 'Tidak diketahui'}</p>
+                    <p class="mt-1">🔍 Akurasi: ${(result.confidence * 100).toFixed(1)}%</p>
+                </div>
+                <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <h3 class="font-bold text-gray-700">📘 Penjelasan Kualitas:</h3>
+                    <p class="mt-1">${deskripsiKualitas}</p>
+                </div>
+                <div class="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                    <h3 class="font-bold text-blue-700">💡 Fakta Unik:</h3>
+                    <p class="mt-1">${faktaRandom}</p>
+                </div>
+            </div>
+        `;
+        return;
+    }
+
+    if (result.status === "Sick") {
+        hasilDeteksi.innerHTML = `
+            <div class="space-y-4">
+                <div class="p-4 bg-red-50 rounded-lg border border-red-200">
+                    <h3 class="font-bold text-red-700">❗ Daun Sakit</h3>
+                    <p class="mt-2">🦠 Penyakit: ${result.penyakit || 'Tidak diketahui'}</p>
+                    <p class="mt-1">🔍 Akurasi: ${(result.confidence * 100).toFixed(1)}%</p>
+                </div>
+                <div class="p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                    <h3 class="font-bold text-yellow-700">📝 Deskripsi Penyakit:</h3>
+                    <p class="mt-1">${result.deskripsi || 'Tidak tersedia'}</p>
+                </div>
+                <div class="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                    <h3 class="font-bold text-blue-700">💡 Fakta Unik:</h3>
+                    <p class="mt-1">${faktaRandom}</p>
+                </div>
+            </div>
+        `;
+    }
+}
+
+
 </script>
 @endpush
