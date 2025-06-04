@@ -19,32 +19,6 @@ class ArtikelController extends Controller
         return view('admin.artikel.index', compact('artikels'));
     }
 
-    public function data()
-    {
-        $artikels = Artikel::with('user')->select('artikels.*');
-
-        return datatables()->of($artikels)
-            ->addColumn('action', function($artikel) {
-                return '
-                    <a href="'.route('admin.artikel.edit', $artikel->id).'" class="text-blue-600 hover:text-blue-800 mr-3">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                    <form action="'.route('admin.artikel.destroy', $artikel->id).'" method="POST" class="inline" onsubmit="return confirm(\'Yakin hapus artikel?\')">
-                        '.csrf_field().'
-                        '.method_field('DELETE').'
-                        <button type="submit" class="text-red-600 hover:text-red-800">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </form>
-                ';
-            })
-            ->editColumn('tanggal_publikasi', function($artikel) {
-                return $artikel->tanggal_publikasi->format('d M Y');
-            })
-            ->rawColumns(['action'])
-            ->toJson();
-    }
-
     public function create()
     {
         return view('admin.artikel.create');
