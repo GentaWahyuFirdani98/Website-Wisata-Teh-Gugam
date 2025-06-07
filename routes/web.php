@@ -48,8 +48,16 @@ Route::get('/register', [RegisteredUserController::class, 'show'])->middleware('
 
 Route::middleware(['auth', 'pengunjung'])->group(function () {
     Route::get('/deteksi', [DeteksiController::class, 'index'])->name('deteksi');
-    Route::post('/deteksi', [DeteksiController::class, 'store'])->name('deteksi.upload');
+    // Route::post('/deteksi', [DeteksiController::class, 'store'])->name('deteksi.upload');
     Route::post('/deteksi-upload', [DeteksiController::class, 'uploadFromCamera'])->name('deteksi.upload.camera');
+    Route::post('/deteksi/submit', [DeteksiController::class, 'submitDeteksi'])->name('deteksi.submit');
+    Route::post('/rekam', [DeteksiController::class, 'rekam'])->name('deteksi.rekam');
+    Route::get('/deteksi', [DeteksiController::class, 'index'])->name('deteksi');
+    Route::post('/upload-gambar', [DeteksiController::class, 'uploadGambarAjax'])->name('upload.gambar');
+
+
+
+
 });
 
 Route::middleware('auth')->get('/profile', [ProfileController::class, 'index'])->name('profile');

@@ -21,7 +21,7 @@
             </svg>
         </button>
     </div>
-    <p class="text-gray-600 mt-3">Role: {{ $user->role }}</p>
+
 </div>
 
 
@@ -54,8 +54,6 @@
         </form>
     </div>
 
-    
-        <p class="text-gray-500">Belum ada riwayat deteksi.</p>
     
 </div>
 @endsection

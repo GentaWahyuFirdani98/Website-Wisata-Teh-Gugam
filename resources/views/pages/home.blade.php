@@ -7,22 +7,20 @@
     <section class="hero-section h-screen flex items-center justify-center text-white relative">
         <!-- Tombol Kamera -->
          @auth
-    <form action="{{ route('deteksi.upload.camera') }}" method="POST" enctype="multipart/form-data" id="camera-form">
-        @csrf
-        <input type="file"
-               name="gambar"
-               id="camera-input"
-               accept="image/*"
-               capture="environment"
-               onchange="document.getElementById('camera-form').submit()"
-               style="display: none;">
-    </form>
+    @auth
+    <input type="file"
+        accept="image/*"
+        capture="environment"
+        id="camera-input"
+        style="display: none;">
 
     <a href="#" onclick="document.getElementById('camera-input').click(); return false;"
-       class="fixed bottom-6 right-6 z-50 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition">
+    class="fixed bottom-6 right-6 z-50 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition">
         <img src="{{ asset('images/camera.png') }}" alt="Kamera"
-             class="w-8 h-8 md:w-10 md:h-10 object-contain">
+            class="w-8 h-8 md:w-10 md:h-10 object-contain">
     </a>
+    @endauth
+
 @else
     <!-- <a href="{{ route('login') }}"
        class="fixed bottom-6 right-6 z-50 bg-green-600 text-white font-bold py-3 px-5 rounded-full shadow-lg hover:bg-green-700 transition">
@@ -132,15 +130,10 @@
                 <p class="text-gray-600 mb-8 leading-relaxed">
                     Gunakan sistem kami untuk mendeteksi penyakit pada daun teh secara cepat dan akurat. Unggah gambar daun teh yang ingin diperiksa.
                 </p>
-                <div class="bg-white rounded-lg shadow-md p-8 max-w-md mx-auto">
-                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                        </svg>
-                        <p class="text-gray-600 mb-4">Unggah gambar daun teh</p>
-
-                    </div>
-                </div>
+                    <a href="{{ route('deteksi') }}" 
+                    class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg shadow transition duration-300">
+                        Deteksi Sekarang
+                    </a>
             </div>
         </div>
     </section>
@@ -241,19 +234,6 @@
             </div>
         </div>
     </section>
-
-<!-- Hidden Camera Input and Auto Submit Form -->
-<!-- <form action="{{ route('deteksi.upload.camera') }}" method="POST" enctype="multipart/form-data" id="camera-form">
-    @csrf
-    <input type="file"
-           name="gambar"
-           id="camera-input"
-           accept="image/*"
-           capture="environment"
-           onchange="document.getElementById('camera-form').submit()"
-           style="display: none;">
-</form>
- -->
 
 
 
@@ -407,6 +387,22 @@
             closeModal();
         }
     });
+
+
+document.getElementById('camera-input')?.addEventListener('change', function (e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        localStorage.setItem('previewImage', event.target.result); // simpan Base64
+        localStorage.setItem('imageName', file.name);
+        window.location.href = "/deteksi"; // redirect
+    };
+    reader.readAsDataURL(file);
+});
+
+
 </script>
 @endpush
 

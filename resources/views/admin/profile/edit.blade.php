@@ -25,7 +25,7 @@
             </div>
         </div>
 
-        <div class="mt-6 border-t pt-6">
+        <!-- <div class="mt-6 border-t pt-6">
             <h2 class="text-lg font-semibold mb-4">Ubah Password</h2>
             
             <div class="mb-4">
@@ -45,7 +45,7 @@
                 <input type="password" name="new_password_confirmation" 
                        class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500">
             </div>
-        </div>
+        </div> -->
 
         <div class="flex justify-end mt-6 space-x-4">
             <a href="{{ route('admin.profile.show') }}" class="bg-gray-200 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-300">
