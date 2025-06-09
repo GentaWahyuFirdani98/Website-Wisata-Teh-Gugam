@@ -27,6 +27,8 @@
     @endif
 
     <script src="{{ asset('js/app.js') }}"></script>
+    
+    {{-- Tambahkan ini supaya galeri.js bisa bekerja --}}
     @stack('scripts')
 </body>
 </html>

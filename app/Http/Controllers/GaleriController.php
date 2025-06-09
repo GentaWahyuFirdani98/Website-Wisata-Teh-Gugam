@@ -24,7 +24,7 @@ class GaleriController extends Controller
         $validated = $request->validate([
             'judul' => 'required|max:255',
             'deskripsi' => 'nullable',
-            'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'foto' => 'required|image',
         ]);
 
         Galeri::create([
@@ -47,7 +47,7 @@ class GaleriController extends Controller
         $request->validate([
             'judul' => 'required|max:255',
             'deskripsi' => 'nullable',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'foto' => 'nullable|image',
         ]);
 
         $data = $request->except('foto');

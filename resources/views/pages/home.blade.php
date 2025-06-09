@@ -64,10 +64,6 @@
                     Lihat selengkapnya
                 </a>
                 <div class="section-divider"></div>
-                <p class="text-gray-600 mt-8">
-                    Artikel<br>
-                    Baca dan Pelajari Lebih Lanjut tentang Kami
-                </p>
             </div>
         </div>
     </section>
@@ -142,7 +138,6 @@
     <section id="lokasi" class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold mb-8 text-center">Temukan Cara Menuju ke Kebun Teh Gunung Gambir</h2>
-            
             <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 items-center">
                 <div class="rounded-lg overflow-hidden shadow-lg h-80">
                     <iframe 
@@ -172,71 +167,20 @@
         </div>
     </section>
 
-    <!-- Galeri Section -->
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">Galeri</h2>
-            
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
-                <!-- Item 1 -->
-                <div class="gallery-item overflow-hidden rounded-lg bg-white shadow-md" onclick="openModal('{{ asset('images/wkt1.jpeg') }}', 'Kebun Teh 1')">
-                    <img src="{{ asset('images/wkt1.jpeg') }}" alt="Kebun Teh 1" class="w-full h-48 object-cover">
-                    <div class="p-3">
-                        <p class="font-medium text-center">Kebun Teh 1</p>
-                    </div>
+     <section class="py-16 bg-white">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-2 mb-8">
+            @foreach($galeris as $galeri)
+                <div class="gallery-item overflow-hidden bg-white shadow-md">
+                    <img src="{{ asset('storage/' . $galeri->foto) }}" alt="{{ $galeri->judul }}" class="w-full h-48 object-cover">
                 </div>
-                
-                <!-- Item 2 -->
-                <div class="gallery-item overflow-hidden rounded-lg bg-white shadow-md" onclick="openModal('{{ asset('images/wkt2.jpg') }}', 'Kebun Teh 2')">
-                    <img src="{{ asset('images/wkt2.jpg') }}" alt="Kebun Teh 2" class="w-full h-48 object-cover">
-                    <div class="p-3">
-                        <p class="font-medium text-center">Kebun Teh 2</p>
-                    </div>
-                </div>
-                
-                <!-- Item 3 -->
-                <div class="gallery-item overflow-hidden rounded-lg bg-white shadow-md" onclick="openModal('{{ asset('images/wkt3.jpg') }}', 'Kebun Teh 3')">
-                    <img src="{{ asset('images/wkt3.jpg') }}" alt="Kebun Teh 3" class="w-full h-48 object-cover">
-                    <div class="p-3">
-                        <p class="font-medium text-center">Kebun Teh 3</p>
-                    </div>
-                </div>
-                
-                <!-- Item 4 -->
-                <div class="gallery-item overflow-hidden rounded-lg bg-white shadow-md" onclick="openModal('{{ asset('images/wkt4.webp') }}', 'Kebun Teh 4')">
-                    <img src="{{ asset('images/wkt4.webp') }}" alt="Kebun Teh 4" class="w-full h-48 object-cover">
-                    <div class="p-3">
-                        <p class="font-medium text-center">Kebun Teh 4</p>
-                    </div>
-                </div>
-                
-                <!-- Item 5 -->
-                <div class="gallery-item overflow-hidden rounded-lg bg-white shadow-md" onclick="openModal('{{ asset('images/wkt5.jpg') }}', 'Kebun Teh 5')">
-                    <img src="{{ asset('images/wkt5.jpg') }}" alt="Kebun Teh 5" class="w-full h-48 object-cover">
-                    <div class="p-3">
-                        <p class="font-medium text-center">Kebun Teh 5</p>
-                    </div>
-                </div>
-                
-                <!-- Item 6 -->
-                <div class="gallery-item overflow-hidden rounded-lg bg-white shadow-md" onclick="openModal('{{ asset('images/wkt6.JPG') }}', 'Kebun Teh 6')">
-                    <img src="{{ asset('images/wkt6.JPG') }}" alt="Kebun Teh 6" class="w-full h-48 object-cover">
-                    <div class="p-3">
-                        <p class="font-medium text-center">Kebun Teh 6</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center">
-                <a href="{{ route('galeri') }}" class="btn btn-outline inline-block px-6 py-2 rounded-lg font-medium">
-                    Lihat Semua >
-                </a>
-            </div>
+            @endforeach
         </div>
-    </section>
-
-
-
+        <div class="text-center">
+            <a href="{{ route('galeri') }}" class="btn btn-outline inline-block px-6 py-2 rounded-lg font-medium">
+                Lihat Semua >
+            </a>
+        </div>
+     </section>
 
 @endsection
 
@@ -353,64 +297,18 @@
 
 @push('scripts')
 <script>
-    // Fungsi untuk membuka modal preview
-    function openModal(imageSrc, caption) {
-        const modal = document.getElementById('gallery-modal');
-        const modalImage = document.getElementById('modal-image');
-        const imageCaption = document.getElementById('image-caption');
-        
-        modalImage.src = imageSrc;
-        imageCaption.textContent = caption;
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Mencegah scroll saat modal terbuka
-    }
-    
-    // Fungsi untuk menutup modal
-    function closeModal() {
-        const modal = document.getElementById('gallery-modal');
-        modal.classList.remove('active');
-        document.body.style.overflow = 'auto'; // Mengembalikan scroll
-    }
-    
-    // Tutup modal ketika mengklik di luar gambar
-    window.onclick = function(event) {
-        const modal = document.getElementById('gallery-modal');
-        if (event.target == modal) {
-            closeModal();
-        }
-    }
-    
-    // Tutup modal dengan tombol ESC
-    document.addEventListener('keydown', function(event) {
-        const modal = document.getElementById('gallery-modal');
-        if (event.key === 'Escape' && modal.classList.contains('active')) {
-            closeModal();
-        }
+    // Kamera: Ambil gambar dari kamera dan simpan sementara untuk redirect ke deteksi
+    document.getElementById('camera-input')?.addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            localStorage.setItem('previewImage', event.target.result); // simpan Base64
+            localStorage.setItem('imageName', file.name);
+            window.location.href = "/deteksi"; // redirect
+        };
+        reader.readAsDataURL(file);
     });
-
-
-document.getElementById('camera-input')?.addEventListener('change', function (e) {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = function(event) {
-        localStorage.setItem('previewImage', event.target.result); // simpan Base64
-        localStorage.setItem('imageName', file.name);
-        window.location.href = "/deteksi"; // redirect
-    };
-    reader.readAsDataURL(file);
-});
-
-
 </script>
 @endpush
-
-<!-- Modal Preview Gambar -->
-<div id="gallery-modal" class="gallery-modal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="closeModal()">&times;</span>
-        <img id="modal-image" class="modal-image" src="" alt="Preview Gambar">
-        <p id="image-caption" class="image-caption"></p>
-    </div>
-</div>
