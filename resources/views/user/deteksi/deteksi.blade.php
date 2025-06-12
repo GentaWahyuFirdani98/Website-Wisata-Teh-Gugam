@@ -79,6 +79,17 @@
                     </button>
                 </div>
 
+                <div class="text-center mt-4">
+                    <button id="startRealtime" 
+                        class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-5 rounded-xl shadow transition duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14m-6 4h.01M5 12h.01M5 16h.01M5 8h.01M9 12h.01M9 16h.01M9 8h.01M13 16h.01M13 8h.01M17 12h.01" />
+                        </svg>
+                        Aktifkan Kamera Realtime
+                    </button>
+                </div>
+
                 <div class="fixed bottom-6 right-6 z-50">
                     <input type="file"
                         accept="image/*"
@@ -106,7 +117,28 @@
                 <div id="loadingSpinner" class="spinner hidden"></div>
             </div>
         </div>
+
+        <!-- Realtime Detection Camera -->
+        <div id="realtimeContainer" class="mt-8 hidden flex flex-col items-center">
+            <div class="relative" style="width: 640px; height: 480px;">
+                <video id="liveCamera" autoplay playsinline class="w-full rounded shadow mb-4" width="640" height="480"></video>
+                <canvas id="boundingCanvas" width="640" height="480"
+                    class="absolute top-0 left-0 z-10 pointer-events-none hidden">
+                </canvas>
+            </div>
+            <p id="realtimeInfo" class="text-sm text-gray-500 mt-2">Kamera realtime sedang berjalan...</p>
+            <button id="closeCamera" 
+                class="mt-4 inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-5 rounded-xl shadow hidden transition duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                Tutup Kamera
+            </button>
+        </div>
+
     </div>
+
 
     <!-- Riwayat Deteksi -->
             
@@ -209,6 +241,105 @@
 @endif
 
 <script>
+let video = document.getElementById('liveCamera');
+let canvas = document.getElementById('boundingCanvas');
+let context = canvas.getContext('2d');
+let intervalId = null;
+
+document.getElementById('startRealtime').addEventListener('click', async () => {
+    document.getElementById('realtimeContainer').classList.remove('hidden');
+    document.getElementById('closeCamera').classList.remove('hidden');
+
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.srcObject = stream;
+
+        intervalId = setInterval(() => {
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = video.videoWidth;
+            tempCanvas.height = video.videoHeight;
+            const tempCtx = tempCanvas.getContext('2d');
+            tempCtx.drawImage(video, 0, 0);
+
+            tempCanvas.toBlob(async (blob) => {
+                const formData = new FormData();
+                formData.append('file', blob, 'frame.jpg');
+
+                try {
+                    const res = await fetch('http://127.0.0.1:8000/predict', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    const result = await res.json();
+                    tampilkanHasilRealtime(result);
+                } catch (err) {
+                    console.warn('Gagal mengirim ke API:', err);
+                }
+            }, 'image/jpeg');
+        }, 2000);
+    } catch (err) {
+        alert("Tidak dapat mengakses kamera.");
+        console.error(err);
+    }
+});
+
+document.getElementById('closeCamera').addEventListener('click', () => {
+    clearInterval(intervalId);
+    document.getElementById('realtimeContainer').classList.add('hidden');
+    document.getElementById('closeCamera').classList.add('hidden');
+
+    const stream = video.srcObject;
+    if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+    }
+    video.srcObject = null;
+    context.clearRect(0, 0, canvas.width, canvas.height);
+});
+
+function tampilkanHasilRealtime(result) {
+    const canvas = document.getElementById('boundingCanvas');
+    const video = document.getElementById('liveCamera');
+    const ctx = canvas.getContext('2d');
+
+    // Pastikan canvas terlihat
+    canvas.classList.remove('hidden');
+
+    // Ukuran tetap 640x480
+    canvas.width = 640;
+    canvas.height = 480;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (
+        result &&
+        result.bounding_box &&
+        (result.status === 'Healthy' || result.status === 'Sick') &&
+        result.confidence > 0.3
+    ) {
+        const scaleX = canvas.width / video.videoWidth;
+        const scaleY = canvas.height / video.videoHeight;
+
+        const { x, y, width, height } = result.bounding_box;
+
+        ctx.strokeStyle = result.status === 'Healthy' ? 'green' : 'red';
+        ctx.lineWidth = 3;
+        ctx.strokeRect(x * scaleX, y * scaleY, width * scaleX, height * scaleY);
+
+        // Label di dalam box
+        const label = result.kualitas || result.penyakit || result.status;
+        ctx.fillStyle = 'black';
+        ctx.font = 'bold 16px sans-serif';
+        ctx.fillText(
+            `${label} (${(result.confidence * 100).toFixed(1)}%)`,
+            x * scaleX + 5,
+            y * scaleY + 20
+        );
+    }
+}
+
+
+
+//MAIN
 
     window.addEventListener('DOMContentLoaded', () => {
         const preview = localStorage.getItem('previewImage');
