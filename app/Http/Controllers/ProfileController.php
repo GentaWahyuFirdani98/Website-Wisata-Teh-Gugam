@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class ProfileController extends Controller
 {
@@ -85,7 +86,22 @@ class ProfileController extends Controller
         $user->nama = $request->nama;
         $user->save();
 
-        return redirect()->route('profile')->with('success', 'Nama berhasil diperbarui.');
+        return back()->with('nama_updated', 'Nama berhasil diperbarui.');
+    }
+
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required', 'confirmed', 'min:8'],
+        ]);
+
+        $request->user()->update([
+            'password' => Hash::make($request->password),
+        ]);
+
+        return back()->with('status', 'Password berhasil diperbarui.');
     }
 
 }

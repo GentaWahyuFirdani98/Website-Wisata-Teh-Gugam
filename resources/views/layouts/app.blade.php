@@ -15,7 +15,10 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @stack('styles')
 </head>
-<body class="bg-white text-gray-800 font-opensans">
+<body class="bg-white text-gray-800 font-opensans"
+      data-page="{{ $page ?? '' }}"
+      data-has-errors="{{ $errors->any() ? 'true' : 'false' }}">
+      
     @include('partials.navbar')
     
     <main>
@@ -26,9 +29,9 @@
         @include('layouts.footer')
     @endif
 
-    <script src="{{ asset('js/app.js') }}"></script>
-    
-    {{-- Tambahkan ini supaya galeri.js bisa bekerja --}}
+    {{-- Jangan pakai ini kalau sudah pakai @vite --}}
+    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
+
     @stack('scripts')
 </body>
 </html>

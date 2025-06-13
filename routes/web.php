@@ -36,6 +36,8 @@ Route::middleware(['auth', 'pengunjung'])->group(function () {
 
 Route::middleware('auth')->get('/profile', [ProfileController::class, 'index'])->name('profile');
 Route::put('/profil/update-nama', [ProfileController::class, 'updateNama'])->name('profile.update.nama');
+Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
+
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
