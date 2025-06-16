@@ -7,9 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-use App\Models\User; // Pastikan ada use model user di atas
-
-
+use App\Models\User;
 
 class ArtikelController extends Controller
 {
@@ -33,7 +31,16 @@ class ArtikelController extends Controller
         ]);
 
         $data = $request->except('foto');
-        $data['slug'] = Str::slug($request->judul);
+
+        // Buat slug unik
+        $slug = Str::slug($request->judul);
+        $originalSlug = $slug;
+        $counter = 1;
+        while (Artikel::where('slug', $slug)->exists()) {
+            $slug = $originalSlug . '-' . $counter++;
+        }
+        $data['slug'] = $slug;
+
         $data['user_id'] = auth()->id();
         $data['tanggal_publikasi'] = now();
 
@@ -60,10 +67,19 @@ class ArtikelController extends Controller
         ]);
 
         $data = $request->except('foto');
-        $data['slug'] = Str::slug($request->judul);
+
+        // Hanya buat ulang slug jika judul berubah
+        if ($request->judul !== $artikel->judul) {
+            $slug = Str::slug($request->judul);
+            $originalSlug = $slug;
+            $counter = 1;
+            while (Artikel::where('slug', $slug)->where('id', '!=', $artikel->id)->exists()) {
+                $slug = $originalSlug . '-' . $counter++;
+            }
+            $data['slug'] = $slug;
+        }
 
         if ($request->hasFile('foto')) {
-            // Hapus foto lama jika ada
             if ($artikel->foto) {
                 Storage::disk('public')->delete($artikel->foto);
             }
@@ -82,8 +98,7 @@ class ArtikelController extends Controller
             Storage::disk('public')->delete($artikel->foto);
         }
         $artikel->delete();
+
         return redirect()->route('admin.artikel.index')->with('success', 'Artikel berhasil dihapus');
     }
-
-
 }

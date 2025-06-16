@@ -20,7 +20,7 @@
                 @foreach($galeris as $galeri)
                     <div class="gallery-img rounded-lg shadow-md overflow-hidden cursor-pointer"
                          onclick="openModal('{{ asset('storage/' . $galeri->foto) }}')">
-                        <img src="{{ asset('storage/' . $galeri->foto) }}" alt="{{ $galeri->judul }}" class="w-full h-48 object-cover">
+                        <img src="{{ asset('storage/' . $galeri->foto) }}" class="w-full h-48 object-cover">
                     </div>
                 @endforeach
             </div>

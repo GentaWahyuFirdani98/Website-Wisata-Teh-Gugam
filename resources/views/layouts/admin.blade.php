@@ -30,7 +30,7 @@
 <body class="bg-gray-100">
     <div class="flex h-screen overflow-hidden">
         <!-- Sidebar -->
-        <div class="sidebar bg-green-800 text-white w-64 flex-shrink-0 fixed md:relative h-full z-10">
+        <div id="adminSidebar" class="sidebar bg-green-800 text-white w-64 flex-shrink-0 fixed md:relative h-full z-10">
             <div class="p-4 border-b border-green-700">
                 <h1 class="text-xl font-bold flex items-center">
                     <span class="mr-2">TEH</span>
@@ -114,28 +114,42 @@
             </div> -->
 
             <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-green-700 bg-green-900">
-                <a href="{{ route('admin.profile.show') }}" class="flex items-center mb-4 hover:text-gray-300">
-                    <div class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center text-lg font-bold">
-                        {{ strtoupper(substr(auth()->user()->nama, 0, 1)) }}
-                    </div>
-                    <div class="ml-3">
-                        <p class="font-medium">{{ auth()->user()->nama }}</p>
-                        <p class="text-xs text-green-300 capitalize">{{ auth()->user()->role }}</p>
-                    </div>
-                </a>
-                <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="flex items-center w-full p-2 rounded hover:bg-green-800 text-green-300">
-                        <i class="fas fa-sign-out-alt mr-3"></i>
-                        Keluar
-                    </button>
-                </form>
-            </div>
+            <!-- Link ke halaman pengunjung -->
+            <a href="{{ url('/') }}" target="_blank" class="flex items-center mb-4 hover:text-gray-300">
+                <div class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center text-lg font-bold">
+                    🌐
+                </div>
+                <div class="ml-3">
+                    <p class="font-medium">Lihat Situs</p>
+                    <p class="text-xs text-green-300">Ke halaman utama</p>
+                </div>
+            </a>
+
+            <!-- Link profil admin -->
+            <a href="{{ route('admin.profile.show') }}" class="flex items-center mb-4 hover:text-gray-300">
+                <div class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center text-lg font-bold">
+                    {{ strtoupper(substr(auth()->user()->nama, 0, 1)) }}
+                </div>
+                <div class="ml-3">
+                    <p class="font-medium">{{ auth()->user()->nama }}</p>
+                    <p class="text-xs text-green-300 capitalize">{{ auth()->user()->role }}</p>
+                </div>
+            </a>
+
+            <!-- Logout -->
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="flex items-center w-full p-2 rounded hover:bg-green-800 text-green-300">
+                    <i class="fas fa-sign-out-alt mr-3"></i>
+                    Keluar
+                </button>
+            </form>
+        </div>
 
         </div>
         
         <!-- Main Content -->
-        <div class="flex-1 overflow-auto">
+        <div class="flex-1 md:ml-0">
             <!-- Mobile Header -->
             <header class="bg-white shadow-sm md:hidden p-4 flex items-center justify-between">
                 <button id="sidebarToggle" class="text-gray-600">
@@ -146,17 +160,34 @@
             </header>
             
             <!-- Content -->
-            <main class="p-6">
+            <main class="overflow-y-auto h-full w-full p-4">
                 @yield('content')
             </main>
         </div>
     </div>
 
-    <script>
-        // Toggle sidebar on mobile
-        document.getElementById('sidebarToggle').addEventListener('click', function() {
-            document.querySelector('.sidebar').classList.toggle('open');
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const sidebar = document.getElementById('adminSidebar');
+        const toggleBtn = document.getElementById('sidebarToggle');
+
+        // Buka/tutup sidebar saat tombol diklik
+        toggleBtn.addEventListener('click', function (e) {
+            e.stopPropagation(); // agar tidak ikut trigger klik luar
+            sidebar.classList.toggle('open');
         });
-    </script>
+
+        // Klik di luar sidebar → tutup sidebar
+        document.addEventListener('click', function (e) {
+            const clickedOutsideSidebar = !sidebar.contains(e.target);
+            const clickedOutsideToggle = !toggleBtn.contains(e.target);
+
+            if (sidebar.classList.contains('open') && clickedOutsideSidebar && clickedOutsideToggle) {
+                sidebar.classList.remove('open');
+            }
+        });
+    });
+</script>
+
 </body>
 </html>

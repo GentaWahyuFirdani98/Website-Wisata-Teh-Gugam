@@ -18,6 +18,7 @@ class ArtikelController extends Controller
         $artikel = Artikel::where('slug', $slug)->firstOrFail();
         return view('user.artikel.show', compact('artikel'));
     }
+    
 
     
 }

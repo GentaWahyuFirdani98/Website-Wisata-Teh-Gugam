@@ -7,6 +7,7 @@ use App\Models\JenisPenyakit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class DeteksiController extends Controller
 {
@@ -22,14 +23,21 @@ class DeteksiController extends Controller
             $deteksis = DeteksiDaunTeh::with(['user', 'jenisPenyakit'])
                 ->latest()
                 ->paginate(10);
-            return view('admin.deteksi.index', compact('deteksis'));
+
+            // Hitung statistik berdasarkan nama penyakit
+            $statistik = DeteksiDaunTeh::with('jenisPenyakit')
+                ->get()
+                ->groupBy(fn($item) => $item->jenisPenyakit->nama_penyakit ?? 'Tidak Diketahui')
+                ->map(fn($group) => $group->count());
+
+            return view('admin.deteksi.index', compact('deteksis', 'statistik'));
         } else {
             $gambar = session('gambar');
-    
+
             $riwayat = DeteksiDaunTeh::with('jenisPenyakit')
                 ->where('user_id', auth()->id())
                 ->latest()
-                ->take(20) // Batasin agar performa tetap baik
+                ->take(20)
                 ->get();
 
             return view('user.deteksi.deteksi', compact('gambar', 'riwayat'));
@@ -65,17 +73,17 @@ class DeteksiController extends Controller
     }
 
     public function uploadFromCamera(Request $request)
-{
-    $request->validate([
-        'gambar' => 'required|image|max:5120', // 5MB
-    ]);
-
-    $path = $request->file('gambar')->store('deteksi', 'public');
-    $filename = basename($path);
-
-    // Redirect ke route deteksi (GET /deteksi), bawa nama gambar via session
-    return redirect()->route('deteksi')->with('gambar', $filename);
-}
+    {
+        $request->validate([
+            'gambar' => 'required|image|max:5120', // 5MB
+        ]);
+    
+        $path = $request->file('gambar')->store('deteksi', 'public');
+        $filename = basename($path);
+    
+        // Redirect ke route deteksi (GET /deteksi), bawa nama gambar via session
+        return redirect()->route('deteksi')->with('gambar', $filename);
+    }
 
 
 
@@ -174,6 +182,34 @@ public function uploadGambarAjax(Request $request)
     return response()->json(['filename' => $filename]);
 }
 
+
+public function destroy($id)
+{
+    $deteksi = DeteksiDaunTeh::findOrFail($id);
+
+    // Hapus file gambar dari storage
+    if ($deteksi->foto_daun && Storage::exists('public/deteksi/' . $deteksi->foto_daun)) {
+        Storage::delete('public/deteksi/' . $deteksi->foto_daun);
+    }
+
+    $deteksi->delete();
+
+    return redirect()->route('admin.deteksi.index')->with('success', 'Data deteksi berhasil dihapus.');
+}
+
+public function destroyAll()
+{
+    $deteksis = \App\Models\DeteksiDaunTeh::all();
+
+    foreach ($deteksis as $deteksi) {
+        if ($deteksi->foto_daun && \Storage::disk('public')->exists('deteksi/' . $deteksi->foto_daun)) {
+            \Storage::disk('public')->delete('deteksi/' . $deteksi->foto_daun);
+        }
+        $deteksi->delete();
+    }
+
+    return redirect()->route('admin.deteksi.index')->with('success', 'Semua data deteksi berhasil dihapus.');
+}
 
 
 }

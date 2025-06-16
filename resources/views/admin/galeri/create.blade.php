@@ -25,7 +25,7 @@
                 <div class="dropzone" id="dropzone">
                     <input type="file" name="foto" id="fotoInput" class="hidden" required>
                     <label for="fotoInput" class="cursor-pointer">
-                        <div class="flex flex-col items-center justify-center">
+                        <div id="uploadPrompt" class="flex flex-col items-center justify-center">
                             <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-2"></i>
                             <p class="text-gray-500">Klik atau drop file di sini</p>
                             <p class="text-sm text-gray-400 mt-1">Format: JPG/PNG (Max 2MB)</p>
@@ -55,6 +55,7 @@
             reader.onload = function(event) {
                 document.getElementById('preview').classList.remove('hidden');
                 document.getElementById('previewImage').src = event.target.result;
+                document.getElementById('uploadPrompt').classList.add('hidden'); 
             };
             reader.readAsDataURL(file);
         }

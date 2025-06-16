@@ -6,5 +6,9 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
+// Import komponen navbar
+import initNavbar from './user/navbar';
+
 // Import logic khusus halaman profil
-import './profile';
+import './user/profile';
+

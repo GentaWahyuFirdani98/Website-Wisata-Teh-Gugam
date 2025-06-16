@@ -24,11 +24,25 @@ class ProfileController extends Controller
     {
         $user = auth()->user();
 
-        $request->validate([
+       $request->validate([
             'nama' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
             'current_password' => 'nullable|required_with:new_password|string',
-            'new_password' => 'nullable|string|min:8|different:current_password|confirmed',
+            'new_password' => 'nullable|string|min:8|confirmed|different:current_password',
+        ], [
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.string' => 'Nama harus berupa teks.',
+            'nama.max' => 'Nama tidak boleh lebih dari 255 karakter.',
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.unique' => 'Email sudah digunakan.',
+
+        
+            'current_password.required_with' => 'Password lama wajib diisi jika ingin mengganti password.',
+            'new_password.required' => 'Password baru wajib diisi.',
+            'new_password.confirmed' => 'Konfirmasi password tidak cocok.',
+            'new_password.min' => 'Password baru minimal 8 karakter.',
+            'new_password.different' => 'Password baru harus berbeda dari password lama.',
         ]);
 
         $user->nama = $request->nama;
@@ -80,28 +94,38 @@ class ProfileController extends Controller
     {
         $request->validate([
             'nama' => 'required|string|max:255',
+        ], [
+            'nama.required' => 'Nama wajib diisi.',
+            'nama.string' => 'Nama harus berupa teks.',
+            'nama.max' => 'Nama tidak boleh lebih dari 255 karakter.',
         ]);
 
         $user = auth()->user();
         $user->nama = $request->nama;
         $user->save();
 
-        return back()->with('nama_updated', 'Nama berhasil diperbarui.');
+        // Menggunakan session untuk pop-up sukses
+        return back()->with('nama_updated', true);
     }
-
 
     public function updatePassword(Request $request)
     {
         $request->validate([
             'current_password' => ['required', 'current_password'],
             'password' => ['required', 'confirmed', 'min:8'],
+        ], [
+            'current_password.required' => 'Password lama wajib diisi.',
+            'current_password.current_password' => 'Password lama tidak cocok.',
+            'password.required' => 'Password baru wajib diisi.',
+            'password.confirmed' => 'Konfirmasi password tidak cocok.',
+            'password.min' => 'Password baru minimal 8 karakter.',
         ]);
 
         $request->user()->update([
             'password' => Hash::make($request->password),
         ]);
 
-        return back()->with('status', 'Password berhasil diperbarui.');
+        // Menggunakan session untuk pop-up sukses
+        return back()->with('status', 'Password berhasil diperbarui');
     }
-
 }

@@ -341,32 +341,48 @@ function tampilkanHasilRealtime(result) {
 
 //MAIN
 
-    window.addEventListener('DOMContentLoaded', () => {
-        const preview = localStorage.getItem('previewImage');
-        const namaFile = localStorage.getItem('imageName');
+   document.addEventListener('DOMContentLoaded', function () {
+    // Ambil data dari localStorage jika ada
+    const preview = localStorage.getItem('previewImage');
+    const namaFile = localStorage.getItem('imageName');
 
-        if (preview && namaFile) {
-            // Set preview gambar
-            const previewImg = document.getElementById('previewImage');
-            previewImg.src = preview;
-            document.getElementById('imagePreviewContainer').classList.remove('hidden');
-            document.getElementById('dropzone').classList.add('hidden');
+    if (preview && namaFile) {
+        const previewImg = document.getElementById('previewImage');
+        const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+        const dropzone = document.getElementById('dropzone');
+        const imageInput = document.getElementById('imageInput');
 
-            // Simpan ke input[type=file] secara manual via fetch
-            fetch(preview)
-                .then(res => res.blob())
-                .then(blob => {
-                    const file = new File([blob], namaFile || 'kamera.jpg', { type: blob.type });
-                    const dataTransfer = new DataTransfer();
-                    dataTransfer.items.add(file);
-                    document.getElementById('imageInput').files = dataTransfer.files;
-                });
+        // Tampilkan preview gambar
+        previewImg.src = preview;
+        imagePreviewContainer.classList.remove('hidden');
+        dropzone.classList.add('hidden');
 
-            // Hapus dari localStorage setelah dimuat
-            localStorage.removeItem('previewImage');
-            localStorage.removeItem('imageName');
-        }
-    });
+        // Buat File object dari blob
+        fetch(preview)
+            .then(res => res.blob())
+            .then(blob => {
+                const file = new File([blob], namaFile || 'kamera.jpg', { type: blob.type });
+
+                // Masukkan file ke dalam input[type=file]
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                imageInput.files = dataTransfer.files;
+
+                // Trigger event change untuk proses deteksi jika perlu
+                const event = new Event('change');
+                imageInput.dispatchEvent(event);
+            })
+            .catch(err => {
+                console.error('Gagal memuat gambar dari localStorage:', err);
+                localStorage.removeItem('previewImage');
+                localStorage.removeItem('imageName');
+            });
+
+        // Hapus data setelah diproses
+        localStorage.removeItem('previewImage');
+        localStorage.removeItem('imageName');
+    }
+});
 
 
     document.getElementById('cameraFromDeteksi')?.addEventListener('change', function (e) {
@@ -387,7 +403,7 @@ function tampilkanHasilRealtime(result) {
         document.getElementById('imageInput').files = dataTransfer.files;
 
         // Jalankan deteksi otomatis
-        document.getElementById('btnDeteksi').click();
+        // document.getElementById('btnDeteksi').click();
     };
     reader.readAsDataURL(file);
     });
@@ -407,6 +423,7 @@ function tampilkanHasilRealtime(result) {
     // Image Upload Functionality
     const dropzone = document.getElementById('dropzone');
     const imageInput = document.getElementById('imageInput');
+        dropzone.addEventListener('click', () => { imageInput.click();});
     const uploadText = document.getElementById('uploadText');
     const imagePreviewContainer = document.getElementById('imagePreviewContainer');
     const previewImage = document.getElementById('previewImage');
@@ -434,8 +451,17 @@ function tampilkanHasilRealtime(result) {
         dropzone.classList.remove('active', 'border-green-500');
         
         if (e.dataTransfer.files.length) {
-            imageInput.files = e.dataTransfer.files;
-            handleImageUpload();
+           dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropzone.classList.remove('active', 'border-green-500');
+
+            if (e.dataTransfer.files.length) {
+                imageInput.files = e.dataTransfer.files;
+
+                // ⛳ WAJIB: panggil fungsi ini untuk proses preview & validasi
+                handleImageUpload();
+            }
+        });
         }
     });
 
@@ -516,12 +542,37 @@ function tampilkanHasilRealtime(result) {
         // 2. Kirim file asli ke FastAPI untuk diproses
         const fastApiData = new FormData();
         fastApiData.append('file', file);
+        try {
         const res = await fetch('http://127.0.0.1:8000/predict', {
             method: 'POST',
             body: fastApiData
         });
 
+        // Cek kalau response gagal (status 500, 404, dll)
+        if (!res.ok) {
+            throw new Error(`Server mengembalikan status ${res.status}`);
+        }
+
         const result = await res.json();
+        tampilkanHasil(result);
+        simpanKeDatabase(namaFile, result); // hanya jika tidak error
+        } catch (error) {
+            console.error('Gagal memproses deteksi dari FastAPI:', error);
+            hasilDeteksi.innerHTML = `
+                <div class="bg-red-100 border border-red-300 text-red-800 px-4 py-3 rounded relative" role="alert">
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M18.364 5.636l-1.414 1.414A9 9 0 006.05 17.95l-1.414 1.414M12 9v2m0 4h.01" />
+                        </svg>
+                        <strong class="font-semibold">Gagal menghubungi server deteksi!</strong>
+                    </div>
+                    <div class="mt-2 text-sm">
+                        Pastikan server FastAPI aktif
+                    </div>
+                </div>
+            `;
+        }
 
         if (result.error) {
             hasilDeteksi.innerHTML = `<p class="text-red-500">${result.error}</p>`;

@@ -48,6 +48,11 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::resource('deteksi', \App\Http\Controllers\DeteksiController::class)->only(['index', 'show', 'destroy']);
+    Route::delete('/deteksi-all', [\App\Http\Controllers\DeteksiController::class, 'destroyAll'])->name('deteksi.destroyAll');
+
+
 });
+
 
 require __DIR__.'/auth.php';

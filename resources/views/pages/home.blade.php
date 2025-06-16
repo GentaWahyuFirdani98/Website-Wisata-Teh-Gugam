@@ -71,10 +71,38 @@
     <!-- Artikel Section -->
     <section class="py-16 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">Gunung Gambir</h2>
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">Artikel</h2>
+
+            <div class="max-w-4xl mx-auto">
+                @foreach($artikels as $artikel)
+                    <div class="article-card bg-white rounded-lg shadow-md overflow-hidden mb-8 border border-gray-200">
+                        <div class="p-6">
+                            <p class="text-gray-500 text-sm mb-2">
+                                {{ \Carbon\Carbon::parse($artikel->tanggal_publikasi)->format('d F Y') }}
+                            </p>
+                            <h3 class="text-2xl font-bold mb-4 text-green-700">
+                                {{ $artikel->judul }}
+                            </h3>
+                            <p class="text-gray-600 mb-4">
+                                {{ \Illuminate\Support\Str::limit(strip_tags($artikel->isi), 150, '...') }}
+                            </p>
+                            <a href="{{ route('artikel.show', $artikel->slug) }}" class="btn-outline inline-block px-4 py-2 rounded-lg font-medium">
+                                Baca Selengkapnya
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    <!-- Artikel Section 
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">Artikel</h2>
             
             <div class="max-w-4xl mx-auto">
-                <!-- Artikel 1 -->
+                Artikel 1 
                 <div class="article-card bg-white rounded-lg shadow-md overflow-hidden mb-8 border border-gray-200">
                     <div class="p-6">
                         <h3 class="text-2xl font-bold mb-4 text-green-700">Sejarah Perkebunan Teh</h3>
@@ -87,7 +115,7 @@
                     </div>
                 </div>
                 
-                <!-- Artikel 2 -->
+                Artikel 2 
                 <div class="article-card bg-white rounded-lg shadow-md overflow-hidden mb-8 border border-gray-200">
                     <div class="p-6">
                         <p class="text-gray-500 text-sm mb-2">25 Juni 2023</p>
@@ -101,7 +129,7 @@
                     </div>
                 </div>
                 
-                <!-- Artikel 3 -->
+                Artikel 3 
                 <div class="article-card bg-white rounded-lg shadow-md overflow-hidden mb-8 border border-gray-200">
                     <div class="p-6">
                         <p class="text-gray-500 text-sm mb-2">10 Juli 2023</p>
@@ -116,7 +144,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Deteksi Penyakit Section -->
     <section class="py-16 bg-gray-50">
@@ -167,7 +195,8 @@
         </div>
     </section>
 
-     <section class="py-16 bg-white">
+    @if($galeris->count())
+    <section class="py-16 bg-white">
         <div class="grid grid-cols-2 md:grid-cols-3 gap-2 mb-8">
             @foreach($galeris as $galeri)
                 <div class="gallery-item overflow-hidden bg-white shadow-md">
@@ -180,12 +209,17 @@
                 Lihat Semua >
             </a>
         </div>
-     </section>
+    </section>
+    @endif
+
 
 @endsection
 
 @push('styles')
 <style>
+    html {
+        scroll-behavior: smooth;
+    }
     .hero-section {
         background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ asset('images/teh.jpg') }}');
         background-size: cover;

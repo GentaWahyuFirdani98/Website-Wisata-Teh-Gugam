@@ -69,13 +69,16 @@
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <!-- Artikel 1 -->
+            <!-- Artikel 1 - ORAMI -->
             <div class="article-card bg-white rounded-lg overflow-hidden shadow-md">
-                <img src="{{ asset('images/artikel1.jpg') }}" alt="Artikel Kebun Teh" class="w-full h-64 object-cover">
+                <img src="https://cnc-magazine.oramiland.com/parenting/images/wisata-gunung-gambir.width-800.format-webp.webp" 
+                     alt="Wisata Gunung Gambir Orami" class="w-full h-64 object-cover">
                 <div class="p-6">
-                    <h3 class="text-xl font-bold mb-4">Sejarah Panjang Kebun Teh Gunung Gambir</h3>
-                    <p class="text-gray-600 mb-4">Baca tentang perjalanan panjang kebun teh kami sejak zaman kolonial hingga menjadi destinasi wisata unggulan.</p>
-                    <a href="https://nativeindonesia.com/kebun-teh-gunung-gambir/" target="_blank" class="inline-flex items-center text-green-600 font-semibold hover:underline">
+                    <h3 class="text-xl font-bold mb-4">Wisata Gunung Gambir, Sejuk dan Menenangkan</h3>
+                    <p class="text-gray-600 mb-4">
+                        Gunung Gambir menjadi salah satu destinasi wisata unggulan di Jember yang menyuguhkan panorama kebun teh, udara segar, dan ketenangan alam yang cocok untuk relaksasi keluarga.
+                    </p>
+                    <a href="https://www.orami.co.id/magazine/wisata-gunung-gambir" target="_blank" class="inline-flex items-center text-green-600 font-semibold hover:underline">
                         Baca Artikel
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -83,14 +86,17 @@
                     </a>
                 </div>
             </div>
-            
-            <!-- Artikel 2 -->
+
+            <!-- Artikel 2 - PTPN12 -->
             <div class="article-card bg-white rounded-lg overflow-hidden shadow-md">
-                <img src="{{ asset('images/artikel2.jpg') }}" alt="Artikel Kebun Teh" class="w-full h-64 object-cover">
+                <img src="https://static.promediateknologi.id/crop/0x0:0x0/750x500/webp/photo/p1/301/2023/11/07/FotoJet-5-2478443330.jpg" 
+                     alt="Kebun Teh Gunung Gambir PTPN12" class="w-full h-64 object-cover">
                 <div class="p-6">
-                    <h3 class="text-xl font-bold mb-4">Proses Pengolahan Teh Berkualitas</h3>
-                    <p class="text-gray-600 mb-4">Temukan bagaimana kami mengolah daun teh menjadi produk berkualitas tinggi dengan proses tradisional.</p>
-                    <a href="https://nativeindonesia.com/kebun-teh-gunung-gambir/" target="_blank" class="inline-flex items-center text-green-600 font-semibold hover:underline">
+                    <h3 class="text-xl font-bold mb-4">Menikmati Suasana Sejuk di Kebun Teh Gunung Gambir di Jember</h3>
+                    <p class="text-gray-600 mb-4">
+                        Artikel dari PTPN12 mengulas suasana sejuk dan pengalaman menyenangkan ketika mengunjungi Kebun Teh Gunung Gambir, tempat ideal untuk pecinta alam dan ketenangan.
+                    </p>
+                    <a href="https://stagging.ptpn12.com/2023/11/08/menikmati-suasana-sejuk-di-kebun-teh-gunung-gambir-di-jember/" target="_blank" class="inline-flex items-center text-green-600 font-semibold hover:underline">
                         Baca Artikel
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -101,6 +107,7 @@
         </div>
     </div>
 </section>
+
 @endsection
 
 @push('styles')

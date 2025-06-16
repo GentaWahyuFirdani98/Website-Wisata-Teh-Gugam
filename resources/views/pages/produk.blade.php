@@ -26,7 +26,7 @@
                 <p class="text-gray-600 mb-4">{{ $product->deskripsi }}</p>
                 <div class="flex items-center justify-between">
                     <span class="price-tag text-xl font-semibold text-gray-800">Rp{{ number_format($product->harga, 0, ',', '.') }}</span>
-                    <a href="#" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg transition duration-300">
+                    <a href="https://wa.link/g8bj5u" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg transition duration-300">
                         {{ $product->jenis_produk === 'kuliner' ? 'Lihat Menu' : 'Pesan Sekarang' }}
                     </a>
                 </div>
