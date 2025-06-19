@@ -57,7 +57,7 @@
                     Warisan Hijau dari Masa Kolonial hingga Masa Kini
                 </p>
                 <p class="text-gray-600 mb-8 leading-relaxed">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est...
+                    Kebun Teh Gunung Gambir merupakan salah satu perkebunan teh tertua di Indonesia yang didirikan pada masa kolonial Belanda. Dengan ketinggian 950-1250 meter di atas permukaan laut, perkebunan ini menawarkan panorama alam yang ...
                 </p>
                 <div class="section-divider"></div>
                 <a href="{{ route('about') }}" class="text-green-600 font-medium hover:text-green-800 hover:underline">
@@ -77,6 +77,7 @@
                 @foreach($artikels as $artikel)
                     <div class="article-card bg-white rounded-lg shadow-md overflow-hidden mb-8 border border-gray-200">
                         <div class="p-6">
+                            <img src="{{ asset('storage/' . $artikel->foto) }}" alt="{{ $artikel->judul }}" class="w-full h-48 object-cover mb-4 rounded">
                             <p class="text-gray-500 text-sm mb-2">
                                 {{ \Carbon\Carbon::parse($artikel->tanggal_publikasi)->format('d F Y') }}
                             </p>

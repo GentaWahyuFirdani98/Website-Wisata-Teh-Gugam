@@ -43,8 +43,20 @@
 
 <!-- Main Content -->
 <main class="container mx-auto py-12 px-4 md:px-6">
+    <!-- Langkah-langkah Deteksi -->
+    <section class="mb-10 bg-white p-6 rounded-xl shadow-md max-w-6xl mx-auto">
+        <h2 class="text-2xl font-bold text-green-700 mb-4">Langkah-Langkah Deteksi Daun Teh</h2>
+        <ol class="list-decimal pl-6 text-gray-700 space-y-2 text-sm md:text-base">
+            <li>Pertama, siapin foto daun tehnya dulu ya, pastiin fotonya jelas, gak blur dan daunnya terlihat utuh</li>
+            <li>Untuk deteksi secara real-time gunakan tombol "Aktifkan Kamera Realtime" untuk melihat hasil deteksi langsung dari kamera (tanpa disimpan)</li>
+            <li>Klik tombol Upload Foto terus pilih gambar yang kamu ambil tadi dan klik tombol "Deteksi sekarang"</li>
+            <li>Kalo udah, tunggu sebentar sambil sistem ngecek fotonya ya!</li>
+            <li>Lihat hasil deteksinya, cek apakah daunnya berpenyakit atau tidak</li>
+            <li>Hasil deteksi otomatis kesimpan di riwayat, jadi kamu bisa cek lagi kapan aja!</li>
+        </ol>
+    </section>
+
     <div class="flex flex-col md:flex-row gap-8 max-w-6xl mx-auto">
-        
         <!-- Upload -->
         <div class="w-full md:w-1/2">
             <div class="bg-white p-6 rounded-xl shadow-md">
@@ -112,7 +124,7 @@
             <div class="bg-white p-6 rounded-xl shadow-md h-full">
                 <h2 class="text-xl font-bold text-green-700 mb-4">Hasil Deteksi</h2>
                 <div id="hasilDeteksi" class="h-64 overflow-y-auto border border-gray-200 rounded p-4 text-sm text-gray-700 space-y-4">
-                    <p class="text-gray-500 text-center">Hasil deteksi akan muncul di sini</p>
+                    <p class="text-gray-500 text-center">Hasil deteksi akan muncul di sini</p>  
                 </div>
                 <div id="loadingSpinner" class="spinner hidden"></div>
             </div>
@@ -203,12 +215,181 @@
 
 @push('styles')
 <style>
+    /* Solusi 1: Perbaiki kontras dan overlay */
     .hero-section {
-        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ asset("images/deteksi.jpg") }}');
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('{{ asset("images/deteksi.jpg") }}');
         background-size: cover;
         background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed; /* Parallax effect */
+        min-height: 300px; /* Pastikan tinggi minimum */
+        position: relative;
     }
-    
+
+    /* Solusi 2: Tambah gradient yang lebih dramatis */
+    .hero-section-alt1 {
+        background: 
+            linear-gradient(135deg, rgba(34, 197, 94, 0.8) 0%, rgba(21, 128, 61, 0.9) 100%),
+            linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
+            url('{{ asset("images/deteksi.jpg") }}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 300px;
+    }
+
+    /* Solusi 3: Gradient dengan warna hijau teh */
+    .hero-section-alt2 {
+        background: 
+            radial-gradient(circle at center, rgba(22, 163, 74, 0.3) 0%, rgba(21, 128, 61, 0.8) 70%),
+            linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
+            url('{{ asset("images/deteksi.jpg") }}');
+        background-size: cover;
+        background-position: center;
+        background-blend-mode: multiply;
+        min-height: 300px;
+    }
+
+    /* Solusi 4: Dengan shadow box untuk teks */
+    .hero-section-text-enhanced {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        background: rgba(0, 0, 0, 0.3);
+        padding: 2rem;
+        border-radius: 12px;
+        backdrop-filter: blur(8px);
+    }
+
+    /* Solusi 5: Fallback jika gambar gagal load */
+    .hero-section-fallback {
+        background: 
+            linear-gradient(135deg, rgb(34, 197, 94) 0%, rgb(21, 128, 61) 100%),
+            url('{{ asset("images/deteksi.jpg") }}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 300px;
+    }
+
+    /* Media queries untuk responsiveness */
+    @media (max-width: 768px) {
+        .hero-section {
+            background-attachment: scroll; /* Hindari parallax di mobile */
+            min-height: 250px;
+        }
+    }
+
+    /* Animasi subtle untuk hero */
+    @keyframes heroFadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+        /* Solusi untuk memperjelas gambar hero section */
+
+    /* Opsi 1: Kurangi overlay gelap agar gambar lebih terlihat */
+    .hero-section {
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url('{{ asset("images/deteksi.jpg") }}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 300px;
+        position: relative;
+    }
+
+    /* Opsi 2: Gunakan gradient yang lebih subtle */
+    .hero-section-subtle {
+        background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5)), url('{{ asset("images/deteksi.jpg") }}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 300px;
+    }
+
+    /* Opsi 3: Tambah brightness dan contrast */
+    .hero-section-bright {
+        background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{{ asset("images/deteksi.jpg") }}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        filter: brightness(1.1) contrast(1.1);
+        min-height: 300px;
+    }
+
+    /* Opsi 4: Gradient hanya di bagian bawah untuk teks */
+    .hero-section-bottom-gradient {
+        background: url('{{ asset("images/deteksi.jpg") }}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 300px;
+        position: relative;
+    }
+
+    .hero-section-bottom-gradient::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 60%;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+        pointer-events: none;
+    }
+
+    /* Opsi 5: Menggunakan backdrop blur untuk area teks */
+    .hero-section-backdrop {
+        background: url('{{ asset("images/deteksi.jpg") }}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 300px;
+        position: relative;
+    }
+
+    .hero-text-backdrop {
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(8px);
+        padding: 2rem;
+        border-radius: 12px;
+        display: inline-block;
+    }
+
+    /* Perbaikan teks agar lebih kontras */
+    .hero-section h1 {
+        color: white !important;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
+        font-weight: 800;
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero-section p {
+        color: rgba(255, 255, 255, 0.95) !important;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+
+    /* Media query untuk mobile */
+    @media (max-width: 768px) {
+        .hero-section {
+            min-height: 250px;
+        }
+        
+        .hero-section h1 {
+            font-size: 2rem;
+        }
+        
+        .hero-section p {
+            font-size: 1rem;
+        }
+    }
     .spinner {
         border: 4px solid rgba(0, 0, 0, 0.1);
         border-radius: 50%;
@@ -231,6 +412,17 @@
 
 @push('scripts')
 @if(session('gambar'))
+<script>
+    const penyakit_deskripsi = {
+    "Blister Blight": "Si perusak daun muda. Jamur Exobasidium vexans menyebabkan gelembung kecil pada daun muda, terutama saat musim hujan. Jika dibiarkan, dapat menurunkan kualitas panen.",
+    "Red Leaf Spot": "Bercak merah yang muncul pada permukaan daun akibat infeksi jamur. Dapat menyebar dengan cepat dalam kondisi lembap dan mengurangi fotosintesis daun.",
+    "Anthracnose": "Penyakit jamur yang menyebabkan bercak gelap dan nekrotik pada daun. Sering terjadi pada musim hujan dan dapat merusak kualitas daun secara signifikan.",
+    "Bird Eye Spot": "Bercak kecil bulat seperti mata burung yang disebabkan oleh jamur. Mengurangi nilai estetika dan kualitas daun teh.",
+    "Brown Blight": "Penyakit yang menyebabkan daun menjadi coklat dan layu. Biasanya disebabkan oleh kondisi lingkungan yang tidak optimal atau serangan patogen.",
+    "Gray Light": "Penyakit yang menyebabkan daun tampak pucat atau keabu-abuan. Dapat mengurangi kandungan klorofil dan kualitas daun."
+};
+
+</script>
 <script>
     window.addEventListener('DOMContentLoaded', () => {
         document.getElementById('imagePreviewContainer').classList.remove('hidden');
@@ -266,7 +458,7 @@ document.getElementById('startRealtime').addEventListener('click', async () => {
                 formData.append('file', blob, 'frame.jpg');
 
                 try {
-                    const res = await fetch('http://127.0.0.1:8000/predict', {
+                    const res = await fetch('http://10.132.13.9:8000/predict', {
                         method: 'POST',
                         body: formData
                     });
@@ -543,7 +735,7 @@ function tampilkanHasilRealtime(result) {
         const fastApiData = new FormData();
         fastApiData.append('file', file);
         try {
-        const res = await fetch('http://127.0.0.1:8000/predict', {
+        const res = await fetch('http://10.132.13.9:8000/predict', {
             method: 'POST',
             body: fastApiData
         });
@@ -597,61 +789,72 @@ function tampilkanHasil(result) {
     }
 
     const fakta = [
-    "Semua jenis teh—hijau, hitam, putih, oolong—berasal dari satu tanaman yang sama: Camellia sinensis.",
-    "Kualitas terbaik daun teh dipetik dari pucuk dan dua daun muda di bawahnya.",
-    "Daun teh muda biasanya memiliki lebih banyak kafein dan antioksidan dibanding daun tua.",
-    "Kondisi lingkungan seperti ketinggian, curah hujan, dan suhu sangat memengaruhi kualitas daun teh.",
-    "Waktu terbaik untuk memetik daun teh adalah pagi hari saat embun masih menempel.",
-    "Proses pengolahan teh (seperti pengeringan dan fermentasi) menentukan jenis dan rasa teh.",
-    "Daun teh sehat memiliki warna hijau cerah dan tekstur yang utuh tanpa bercak.",
-    "Jamur dan penyakit pada daun teh bisa menurunkan kualitas hasil panen secara signifikan.",
-    "Teh mengandung L-theanine, zat alami yang membantu meningkatkan fokus dan ketenangan.",
-    "Pemrosesan yang salah, seperti pemetikan kasar atau penyimpanan lembap, bisa merusak mutu daun teh."
+        "Semua jenis teh—hijau, hitam, putih, oolong—berasal dari satu tanaman yang sama: Camellia sinensis.",
+        "Kualitas terbaik daun teh dipetik dari pucuk dan dua daun muda di bawahnya.",
+        "Daun teh muda biasanya memiliki lebih banyak kafein dan antioksidan dibanding daun tua.",
+        "Kondisi lingkungan seperti ketinggian, curah hujan, dan suhu sangat memengaruhi kualitas daun teh.",
+        "Waktu terbaik untuk memetik daun teh adalah pagi hari saat embun masih menempel.",
+        "Proses pengolahan teh (seperti pengeringan dan fermentasi) menentukan jenis dan rasa teh.",
+        "Daun teh sehat memiliki warna hijau cerah dan tekstur yang utuh tanpa bercak.",
+        "Jamur dan penyakit pada daun teh bisa menurunkan kualitas hasil panen secara signifikan.",
+        "Teh mengandung L-theanine, zat alami yang membantu meningkatkan fokus dan ketenangan.",
+        "Pemrosesan yang salah, seperti pemetikan kasar atau penyimpanan lembap, bisa merusak mutu daun teh."
     ];
 
     const kualitas_deskripsi = {
-    "T1": "Kualitas terbaik. Daun masih sangat muda, berwarna hijau cerah, utuh, dan belum terbuka penuh. Cocok untuk teh premium dengan rasa dan aroma unggulan.",
-    "T2": "Kualitas bagus. Daun muda yang mulai membuka sedikit. Masih layak untuk teh berkualitas tinggi dengan sedikit penurunan rasa dan aroma dibanding T1.",
-    "T3": "Kualitas sedang. Daun sudah lebih terbuka dan usia sedikit lebih tua. Umumnya digunakan untuk produk teh standar atau campuran.",
-    "T4": "Kualitas rendah. Daun tua, bisa berwarna kusam atau ada sedikit kerusakan. Biasanya digunakan untuk teh massal atau kebutuhan industri."
+        "T1": "Kualitas terbaik. Daun masih sangat muda, berwarna hijau cerah, utuh, dan belum terbuka penuh. Cocok untuk teh premium dengan rasa dan aroma unggulan.",
+        "T2": "Kualitas bagus. Daun muda yang mulai membuka sedikit. Masih layak untuk teh berkualitas tinggi dengan sedikit penurunan rasa dan aroma dibanding T1.",
+        "T3": "Kualitas sedang. Daun sudah lebih terbuka dan usia sedikit lebih tua. Umumnya digunakan untuk produk teh standar atau campuran.",
+        "T4": "Kualitas rendah. Daun tua, bisa berwarna kusam atau ada sedikit kerusakan. Biasanya digunakan untuk teh massal atau kebutuhan industri."
     };
 
-     let html = '';
+    // Array deskripsi penyakit yang sudah ada
+    const penyakit_deskripsi = {
+        "Blister Blight": "Si perusak daun muda. Jamur Exobasidium vexans menyebabkan gelembung kecil pada daun muda, terutama saat musim hujan. Jika dibiarkan, dapat menurunkan kualitas panen.",
+        "Red Leaf Spot": "Bercak merah yang muncul pada permukaan daun akibat infeksi jamur. Dapat menyebar dengan cepat dalam kondisi lembap dan mengurangi fotosintesis daun.",
+        "Anthracnose": "Penyakit jamur yang menyebabkan bercak gelap dan nekrotik pada daun. Sering terjadi pada musim hujan dan dapat merusak kualitas daun secara signifikan.",
+        "Bird Eye Spot": "Bercak kecil bulat seperti mata burung yang disebabkan oleh jamur. Mengurangi nilai estetika dan kualitas daun teh.",
+        "Brown Blight": "Penyakit yang menyebabkan daun menjadi coklat dan layu. Biasanya disebabkan oleh kondisi lingkungan yang tidak optimal atau serangan patogen.",
+        "Gray Light": "Penyakit yang menyebabkan daun tampak pucat atau keabu-abuan. Dapat mengurangi kandungan klorofil dan kualitas daun."
+    };
+
+    let html = '';
     if (result.status === 'Healthy') {
         html = `
         <div class="space-y-4 text-black font-medium">
+            <!-- Kartu Kesehatan -->
+            <div class="bg-green-100 border border-green-200 rounded-xl p-4 shadow">
+                <h3 class="font-bold text-green-700 flex items-center mb-2">
+                    ✅ Daun Sehat
+                </h3>
+                <p class="mb-1">🌿 <strong>Kualitas:</strong> ${result.kualitas}</p>
+                <p>🔍 <strong>Akurasi:</strong> ${(result.confidence * 100).toFixed(1)}%</p>
+            </div>
 
-        <!-- Kartu Kesehatan -->
-        <div class="bg-green-100 border border-green-200 rounded-xl p-4 shadow">
-            <h3 class="font-bold text-green-700 flex items-center mb-2">
-                ✅ Daun Sehat
-            </h3>
-            <p class="mb-1">🌿 <strong>Kualitas:</strong> ${result.kualitas}</p>
-            <p>🔍 <strong>Akurasi:</strong> ${(result.confidence * 100).toFixed(1)}%</p>
+            <!-- Kartu Deskripsi Kualitas -->
+            <div class="bg-gray-100 border border-gray-300 rounded-xl p-4 shadow">
+                <h4 class="font-semibold text-blue-700 flex items-center mb-2">
+                    📘 Penjelasan Kualitas
+                </h4>
+                <p class="text-sm leading-relaxed">${kualitas_deskripsi[result.kualitas] || '-'}</p>
+            </div>
+
+            <!-- Kartu Fakta Unik -->
+            <div class="bg-gray-100 border border-gray-300 rounded-xl p-4 shadow">
+                <h4 class="font-semibold text-yellow-500 flex items-center mb-2">
+                    💡 Fakta Unik
+                </h4>
+                <p class="text-sm leading-relaxed">${fakta[Math.floor(Math.random() * fakta.length)]}</p>
+            </div>
         </div>
-
-        <!-- Kartu Deskripsi Kualitas -->
-        <div class="bg-gray-100 border border-gray-300 rounded-xl p-4 shadow">
-            <h4 class="font-semibold  text-blue-700 flex items-center mb-2">
-                📘 Penjelasan Kualitas
-            </h4>
-            <p class="text-sm leading-relaxed">${kualitas_deskripsi[result.kualitas] || '-'}</p>
-        </div>
-
-        <!-- Kartu Fakta Unik -->
-        <div class="bg-gray-100 border border-gray-300 rounded-xl p-4 shadow">
-            <h4 class="font-semibold text-yellow-500  flex items-center mb-2">
-                💡 Fakta Unik
-            </h4>
-            <p class="text-sm leading-relaxed">${fakta[Math.floor(Math.random() * fakta.length)]}</p>
-        </div>
-
-    </div>
-    `;
+        `;
     } 
     else if (result.status === 'Sick') {
+        // ✅ PERBAIKAN: Cocokkan nama penyakit dengan deskripsi yang sudah ada
+        const deskripsiPenyakit = penyakit_deskripsi[result.penyakit] || 'Deskripsi penyakit tidak tersedia.';
+        
         html = `
-                <div class="space-y-4 text-black font-normal">
+        <div class="space-y-4 text-black font-normal">
             <!-- Kartu Penyakit -->
             <div class="bg-red-100 border border-red-200 rounded-xl p-4 shadow">
                 <h3 class="font-bold text-red-700 flex items-center mb-2 text-base">
@@ -666,7 +869,7 @@ function tampilkanHasil(result) {
                 <h4 class="font-semibold text-yellow-700 flex items-center mb-2 text-base">
                     📝 Deskripsi Penyakit
                 </h4>
-                <p class="text-sm leading-relaxed">${result.deskripsi}</p>
+                <p class="text-sm leading-relaxed">${deskripsiPenyakit}</p>
             </div>
 
             <!-- Kartu Fakta Unik -->
@@ -677,7 +880,6 @@ function tampilkanHasil(result) {
                 <p class="text-sm leading-relaxed">${fakta[Math.floor(Math.random() * fakta.length)]}</p>
             </div>
         </div>
-
         `;
     } 
     else {
@@ -686,7 +888,6 @@ function tampilkanHasil(result) {
 
     document.getElementById('hasilDeteksi').innerHTML = html;
 }
-
 
 function simpanKeDatabase(namaFile, result) {
     fetch('/rekam', {
