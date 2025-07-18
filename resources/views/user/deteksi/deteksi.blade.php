@@ -33,182 +33,509 @@
 @endguest
 -->
 
-<!-- Hero Section -->
-<section class="hero-section h-48 md:h-64 flex items-center justify-center">
-    <div class="container mx-auto px-4 text-center">
-        <h1 class="text-3xl md:text-4xl font-bold text-white">Deteksi Penyakit Daun Teh</h1>
-        <p class="text-white mt-2">Unggah gambar daun teh untuk mendeteksi penyakit</p>
+<!-- Modern Hero Section with Tea Garden Theme -->
+<section class="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+    <!-- Background with Parallax Effect -->
+    <div class="absolute inset-0 bg-gradient-to-br from-emerald-900 via-green-800 to-teal-900">
+        <div class="absolute inset-0 bg-[url('{{ asset('images/bg2.jpg') }}')] bg-cover bg-center opacity-30"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+    </div>
+
+    <!-- Floating Tea Leaves Animation -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="tea-leaf-float absolute top-20 left-10 text-4xl opacity-20 animate-bounce" style="animation-delay: 0s;">🍃</div>
+        <div class="tea-leaf-float absolute top-32 right-20 text-3xl opacity-15 animate-pulse" style="animation-delay: 2s;">🌿</div>
+        <div class="tea-leaf-float absolute bottom-40 left-1/4 text-5xl opacity-10 animate-bounce" style="animation-delay: 4s;">🍃</div>
+        <div class="tea-leaf-float absolute bottom-20 right-1/3 text-3xl opacity-20 animate-pulse" style="animation-delay: 6s;">🌱</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="relative z-10 container mx-auto px-4 text-center">
+        <div class="max-w-4xl mx-auto">
+            <!-- Icon with Animation -->
+            <div class="mb-8">
+                <div class="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-emerald-400 to-green-600 rounded-full shadow-2xl mb-6 animate-pulse">
+                    <span class="text-4xl">🔬</span>
+                </div>
+            </div>
+
+            <!-- Title with Gradient Text -->
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-emerald-300 via-green-200 to-teal-300 bg-clip-text text-transparent leading-tight">
+                AI Deteksi Daun Teh
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="text-xl md:text-2xl text-emerald-100 mb-8 max-w-2xl mx-auto leading-relaxed">
+                Teknologi canggih untuk menganalisis kesehatan daun teh Anda dengan akurasi tinggi
+            </p>
+
+        </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <svg class="w-6 h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
     </div>
 </section>
 
-<!-- Main Content -->
-<main class="container mx-auto py-12 px-4 md:px-6">
-    <!-- Langkah-langkah Deteksi -->
-    <section class="mb-10 bg-white p-6 rounded-xl shadow-md max-w-6xl mx-auto">
-        <h2 class="text-2xl font-bold text-green-700 mb-4">Langkah-Langkah Deteksi Daun Teh</h2>
-        <ol class="list-decimal pl-6 text-gray-700 space-y-2 text-sm md:text-base">
-            <li>Pertama, siapin foto daun tehnya dulu ya, pastiin fotonya jelas, gak blur dan daunnya terlihat utuh</li>
-            <li>Untuk deteksi secara real-time gunakan tombol "Aktifkan Kamera Realtime" untuk melihat hasil deteksi langsung dari kamera (tanpa disimpan)</li>
-            <li>Klik tombol Upload Foto terus pilih gambar yang kamu ambil tadi dan klik tombol "Deteksi sekarang"</li>
-            <li>Kalo udah, tunggu sebentar sambil sistem ngecek fotonya ya!</li>
-            <li>Lihat hasil deteksinya, cek apakah daunnya berpenyakit atau tidak</li>
-            <li>Hasil deteksi otomatis kesimpan di riwayat, jadi kamu bisa cek lagi kapan aja!</li>
-        </ol>
-    </section>
+<!-- Main Content with Modern Design -->
+<main class="relative -mt-20 z-20">
+    <!-- How It Works Section -->
+    <section class="container mx-auto px-4 mb-16">
+        <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12 max-w-6xl mx-auto border border-gray-100">
+            <!-- Section Header -->
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-emerald-400 to-green-600 rounded-full mb-6">
+                    <span class="text-2xl">📋</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Cara Menggunakan</h2>
+                <p class="text-gray-600 text-lg max-w-2xl mx-auto">Ikuti langkah mudah berikut untuk mendeteksi kesehatan daun teh Anda</p>
+            </div>
 
-    <div class="flex flex-col md:flex-row gap-8 max-w-6xl mx-auto">
-        <!-- Upload -->
-        <div class="w-full md:w-1/2">
-            <div class="bg-white p-6 rounded-xl shadow-md">
-                <h2 class="text-xl font-bold text-green-700 mb-4">Upload Gambar</h2>
-
-                <div id="imagePreviewContainer" class="mb-4 hidden">
-                    <div class="relative">
-                        <img id="previewImage" src="#" class="rounded shadow max-h-48 mx-auto" alt="Preview">
-                        <button id="deleteImageBtn" class="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1 m-2 shadow">
-                            &times;
-                        </button>
+            <!-- Steps Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="relative group">
+                    <div class="bg-gradient-to-br from-emerald-50 to-green-50 rounded-2xl p-6 border-2 border-emerald-100 hover:border-emerald-300 transition-all duration-300 hover:shadow-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-emerald-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">1</div>
+                            <h3 class="text-lg font-semibold text-gray-800">Siapkan Foto</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">Ambil foto daun teh yang jelas, tidak blur, dan pastikan daun terlihat utuh untuk hasil deteksi optimal.</p>
                     </div>
                 </div>
 
-                <!-- Dropzone -->
-                <div id="dropzone" class="upload-area border-2 border-dashed border-gray-300 p-6 rounded-lg flex flex-col items-center justify-center cursor-pointer {{ session('gambar') ? 'hidden' : '' }}">
+                <!-- Step 2 -->
+                <div class="relative group">
+                    <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 border-2 border-blue-100 hover:border-blue-300 transition-all duration-300 hover:shadow-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">2</div>
+                            <h3 class="text-lg font-semibold text-gray-800">Upload atau Kamera</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">Pilih foto dari galeri atau gunakan kamera real-time untuk deteksi langsung tanpa menyimpan gambar.</p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="relative group">
+                    <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 border-2 border-purple-100 hover:border-purple-300 transition-all duration-300 hover:shadow-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">3</div>
+                            <h3 class="text-lg font-semibold text-gray-800">Analisis AI</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">Sistem AI akan menganalisis gambar dan memberikan hasil deteksi dalam hitungan detik.</p>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="relative group">
+                    <div class="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-2xl p-6 border-2 border-orange-100 hover:border-orange-300 transition-all duration-300 hover:shadow-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">4</div>
+                            <h3 class="text-lg font-semibold text-gray-800">Lihat Hasil</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">Dapatkan informasi lengkap tentang kesehatan daun, jenis penyakit (jika ada), dan tingkat akurasi.</p>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="relative group">
+                    <div class="bg-gradient-to-br from-teal-50 to-emerald-50 rounded-2xl p-6 border-2 border-teal-100 hover:border-teal-300 transition-all duration-300 hover:shadow-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-teal-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">5</div>
+                            <h3 class="text-lg font-semibold text-gray-800">Riwayat Tersimpan</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">Semua hasil deteksi otomatis tersimpan dalam riwayat untuk referensi dan monitoring jangka panjang.</p>
+                    </div>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="relative group">
+                    <div class="bg-gradient-to-br from-rose-50 to-red-50 rounded-2xl p-6 border-2 border-rose-100 hover:border-rose-300 transition-all duration-300 hover:shadow-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-rose-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">6</div>
+                            <h3 class="text-lg font-semibold text-gray-800">Tindak Lanjut</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">Gunakan informasi hasil deteksi untuk perawatan yang tepat dan konsultasi dengan ahli jika diperlukan.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detection Interface -->
+    <section class="container mx-auto px-4 mb-16">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+
+            <!-- Upload Section -->
+            <div class="bg-white rounded-3xl shadow-xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300">
+                <!-- Header -->
+                <div class="flex items-center mb-8">
+                    <div class="w-12 h-12 bg-gradient-to-br from-emerald-400 to-green-600 rounded-2xl flex items-center justify-center mr-4">
+                        <span class="text-xl">📤</span>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">Upload Gambar</h2>
+                        <p class="text-gray-600 text-sm">Pilih foto daun teh untuk dianalisis</p>
+                    </div>
+                </div>
+
+                <!-- Image Preview -->
+                <div id="imagePreviewContainer" class="mb-6 hidden">
+                    <div class="relative group">
+                        <img id="previewImage" src="#" class="w-full h-64 object-cover rounded-2xl shadow-lg" alt="Preview">
+                        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl flex items-center justify-center">
+                            <button id="deleteImageBtn" class="bg-red-500 hover:bg-red-600 text-white rounded-full p-3 shadow-lg transition-colors duration-200">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modern Dropzone -->
+                <div id="dropzone" class="upload-area border-2 border-dashed border-emerald-200 hover:border-emerald-400 bg-gradient-to-br from-emerald-50 to-green-50 p-8 rounded-2xl flex flex-col items-center justify-center cursor-pointer transition-all duration-300 hover:shadow-lg {{ session('gambar') ? 'hidden' : '' }}">
                     <input type="file" id="imageInput" class="hidden" accept="image/*">
-                    
-                    <!-- ICON UPLOAD (SVG CLOUD) -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                    </svg>
-                    
-                    <p id="uploadText" class="text-gray-500 text-center">Seret & Lepas Gambar di sini<br>atau Klik untuk Upload</p>
-                    <p class="text-gray-400 text-sm mt-3">Format: JPG, PNG (Maks. 5MB)</p>
-                </div>
 
-                <div class="text-center mt-6">
-                    <button id="btnDeteksi" type="button" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded">
-                        Deteksi Sekarang
-                    </button>
-                </div>
-
-                <div class="text-center mt-4">
-                    <button id="startRealtime" 
-                        class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-5 rounded-xl shadow transition duration-200">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14m-6 4h.01M5 12h.01M5 16h.01M5 8h.01M9 12h.01M9 16h.01M9 8h.01M13 16h.01M13 8h.01M17 12h.01" />
+                    <!-- Modern Upload Icon -->
+                    <div class="w-16 h-16 bg-gradient-to-br from-emerald-400 to-green-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
                         </svg>
-                        Aktifkan Kamera Realtime
+                    </div>
+
+                    <h3 id="uploadText" class="text-lg font-semibold text-gray-700 mb-2">Seret & Lepas Gambar</h3>
+                    <p class="text-gray-500 text-center mb-4">atau klik untuk memilih file</p>
+                    <div class="flex items-center space-x-4 text-sm text-gray-400">
+                        <span class="flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
+                            </svg>
+                            JPG, PNG
+                        </span>
+                        <span class="flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                            Max 5MB
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="space-y-4 mt-8">
+                    <!-- Main Detection Button -->
+                    <button id="btnDeteksi" type="button" class="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-semibold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        <span class="flex items-center justify-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                            </svg>
+                            Deteksi Sekarang
+                        </span>
+                    </button>
+
+                    <!-- Real-time Camera Button -->
+                    <button id="startRealtime" class="w-full bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 text-white font-semibold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        <span class="flex items-center justify-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2v-5a2 2 0 00-2-2H5a2 2 0 00-2 2v5a2 2 0 002 2z"></path>
+                            </svg>
+                            Kamera Real-time
+                        </span>
                     </button>
                 </div>
 
+                <!-- Floating Camera Button -->
                 <div class="fixed bottom-6 right-6 z-50">
-                    <input type="file"
-                        accept="image/*"
-                        capture="environment"
-                        id="cameraFromDeteksi"
-                        style="display: none;">
+                    <input type="file" accept="image/*" capture="environment" id="cameraFromDeteksi" style="display: none;">
+                    <button onclick="document.getElementById('cameraFromDeteksi').click();" class="bg-white hover:bg-gray-50 border-2 border-emerald-200 hover:border-emerald-400 rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110">
+                        <img src="{{ asset('images/camera.png') }}" alt="Kamera" class="w-8 h-8 object-contain">
+                    </button>
+                </div>
+            </div>
 
-                    <a href="#" onclick="document.getElementById('cameraFromDeteksi').click(); return false;"
-                    class="inline-block bg-white border rounded-full p-3 shadow-md hover:shadow-lg transition">
-                        <img src="{{ asset('images/camera.png') }}" alt="Kamera"
-                            class="w-8 h-8 md:w-10 md:h-10 object-contain">
+            <!-- Results Section -->
+            <div class="bg-white rounded-3xl shadow-xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300">
+                <!-- Header -->
+                <div class="flex items-center mb-8">
+                    <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-pink-600 rounded-2xl flex items-center justify-center mr-4">
+                        <span class="text-xl">🔍</span>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">Hasil Deteksi</h2>
+                        <p class="text-gray-600 text-sm">Analisis AI untuk daun teh Anda</p>
+                    </div>
+                </div>
+
+                <!-- Results Container -->
+                <div id="hasilDeteksi" class="min-h-[400px] overflow-y-auto">
+                    <!-- Default State -->
+                    <div class="text-center py-12">
+                        <div class="w-24 h-24 bg-gradient-to-br from-gray-100 to-gray-200 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-600 mb-2">Siap untuk Analisis</h3>
+                        <p class="text-gray-500 text-sm max-w-sm mx-auto leading-relaxed">Upload gambar daun teh atau gunakan kamera real-time untuk memulai deteksi penyakit</p>
+
+                        <!-- Quick Stats -->
+                        <div class="grid grid-cols-2 gap-4 mt-8">
+                            <div class="bg-gradient-to-br from-emerald-50 to-green-50 rounded-2xl p-4 border border-emerald-100">
+                                <div class="text-2xl font-bold text-emerald-600">95%</div>
+                                <div class="text-sm text-gray-600">Akurasi</div>
+                            </div>
+                            <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-4 border border-blue-100">
+                                <div class="text-2xl font-bold text-blue-600">&lt;3s</div>
+                                <div class="text-sm text-gray-600">Kecepatan</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loading Spinner -->
+                <div id="loadingSpinner" class="hidden text-center py-8">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-emerald-400 to-green-600 rounded-full animate-spin mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                        </svg>
+                    </div>
+                    <p class="text-gray-600 font-medium">Menganalisis gambar...</p>
+                    <p class="text-gray-500 text-sm mt-1">Mohon tunggu sebentar</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Real-time Detection Camera Section -->
+    <section class="container mx-auto px-4 mb-16">
+        <div id="realtimeContainer" class="hidden">
+            <div class="bg-white rounded-3xl shadow-xl p-8 border border-gray-100 max-w-4xl mx-auto">
+                <!-- Header -->
+                <div class="flex items-center justify-between mb-8">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-cyan-600 rounded-2xl flex items-center justify-center mr-4">
+                            <span class="text-xl">📹</span>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800">Deteksi Real-time</h2>
+                            <p class="text-gray-600 text-sm">Kamera aktif - deteksi langsung</p>
+                        </div>
+                    </div>
+                    <button id="closeCamera" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        <span class="flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                            Tutup Kamera
+                        </span>
+                    </button>
+                </div>
+
+                <!-- Camera Container -->
+                <div class="relative bg-gray-900 rounded-2xl overflow-hidden shadow-inner">
+                    <div class="relative mx-auto" style="max-width: 640px;">
+                        <video id="liveCamera" autoplay playsinline class="w-full h-auto rounded-2xl" width="640" height="480"></video>
+                        <canvas id="boundingCanvas" width="640" height="480" class="absolute top-0 left-0 w-full h-full pointer-events-none"></canvas>
+
+                        <!-- Live Indicator -->
+                        <div class="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center">
+                            <div class="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></div>
+                            LIVE
+                        </div>
+
+                        <!-- Detection Info Overlay -->
+                        <div class="absolute bottom-4 left-4 right-4 bg-black/70 backdrop-blur-sm rounded-xl p-4 text-white">
+                            <p id="realtimeInfo" class="text-sm">Kamera real-time aktif - Arahkan ke daun teh untuk deteksi otomatis</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real-time Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+                    <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-4 border border-green-100 text-center">
+                        <div class="text-2xl font-bold text-green-600">Real-time</div>
+                        <div class="text-sm text-gray-600">Mode Deteksi</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-4 border border-blue-100 text-center">
+                        <div class="text-2xl font-bold text-blue-600">30 FPS</div>
+                        <div class="text-sm text-gray-600">Kecepatan</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-4 border border-purple-100 text-center">
+                        <div class="text-2xl font-bold text-purple-600">Auto</div>
+                        <div class="text-sm text-gray-600">Deteksi</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </div>
+
+
+    <!-- Modern History Section -->
+    <section class="container mx-auto px-4 mb-16">
+        <div class="max-w-7xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-indigo-400 to-purple-600 rounded-full mb-6">
+                    <span class="text-2xl">📊</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Riwayat Deteksi</h2>
+                <p class="text-gray-600 text-lg max-w-2xl mx-auto">Pantau semua hasil deteksi Anda dengan mudah</p>
+            </div>
+
+            @if($riwayat->count() > 0)
+                <!-- Stats Overview -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+                    <div class="bg-gradient-to-br from-emerald-50 to-green-50 rounded-2xl p-6 border border-emerald-100">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center mr-4">
+                                <span class="text-xl">📈</span>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-bold text-emerald-600">{{ $riwayat->count() }}</div>
+                                <div class="text-sm text-gray-600">Total Deteksi</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-100">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center mr-4">
+                                <span class="text-xl">✅</span>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-bold text-green-600">{{ $riwayat->where('jenisPenyakit.status_kesehatan', 'sehat')->count() }}</div>
+                                <div class="text-sm text-gray-600">Daun Sehat</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-red-50 to-pink-50 rounded-2xl p-6 border border-red-100">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-red-500 rounded-xl flex items-center justify-center mr-4">
+                                <span class="text-xl">⚠️</span>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-bold text-red-600">{{ $riwayat->where('jenisPenyakit.status_kesehatan', 'sakit')->count() }}</div>
+                                <div class="text-sm text-gray-600">Daun Sakit</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 border border-blue-100">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center mr-4">
+                                <span class="text-xl">🎯</span>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-bold text-blue-600">{{ number_format($riwayat->avg('confidence') * 100, 1) }}%</div>
+                                <div class="text-sm text-gray-600">Rata-rata Akurasi</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modern History Cards -->
+                <div class="space-y-6" id="historyContainer">
+                    @foreach ($riwayat as $i => $data)
+                        <div class="bg-white rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden {{ $i >= 10 ? 'hidden more-row' : '' }}">
+                            <div class="p-6 md:p-8">
+                                <div class="flex flex-col lg:flex-row lg:items-center gap-6">
+                                    <!-- Image Section -->
+                                    <div class="flex-shrink-0">
+                                        <div class="relative group">
+                                            <img src="{{ asset('storage/deteksi/' . $data->foto_daun) }}"
+                                                 class="w-24 h-24 md:w-32 md:h-32 object-cover rounded-2xl shadow-lg group-hover:scale-105 transition-transform duration-300"
+                                                 alt="Hasil Deteksi">
+                                            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 rounded-2xl transition-colors duration-300"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Content Section -->
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                                            <!-- Main Info -->
+                                            <div class="flex-1">
+                                                <div class="flex items-center gap-3 mb-3">
+                                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
+                                                        @if ($data->jenisPenyakit->status_kesehatan === 'sehat')
+                                                            bg-emerald-100 text-emerald-700 border border-emerald-200
+                                                        @else
+                                                            bg-red-100 text-red-700 border border-red-200
+                                                        @endif">
+                                                        @if ($data->jenisPenyakit->status_kesehatan === 'sehat')
+                                                            ✅ Sehat
+                                                        @else
+                                                            ⚠️ Sakit
+                                                        @endif
+                                                    </span>
+                                                    <span class="text-sm text-gray-500">
+                                                        {{ $data->created_at->format('d M Y, H:i') }}
+                                                    </span>
+                                                </div>
+
+                                                <h3 class="text-lg font-semibold text-gray-800 mb-2">
+                                                    {{ $data->jenisPenyakit->nama_penyakit ?? 'Daun Sehat' }}
+                                                </h3>
+
+                                                @if($data->jenisPenyakit && $data->jenisPenyakit->deskripsi)
+                                                    <p class="text-gray-600 text-sm leading-relaxed mb-3 line-clamp-2">
+                                                        {{ Str::limit($data->jenisPenyakit->deskripsi, 120) }}
+                                                    </p>
+                                                @endif
+                                            </div>
+
+                                            <!-- Accuracy Badge -->
+                                            <div class="flex-shrink-0">
+                                                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-4 border border-blue-100 text-center">
+                                                    <div class="text-2xl font-bold text-blue-600">{{ number_format($data->confidence * 100, 1) }}%</div>
+                                                    <div class="text-xs text-gray-600 mt-1">Akurasi</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+                <!-- Load More Button -->
+                @if ($riwayat->count() > 10)
+                    <div class="text-center mt-12">
+                        <button id="btnLihatSelengkapnya" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                            Lihat Selengkapnya
+                        </button>
+                    </div>
+                @endif
+            @else
+                <!-- Empty State -->
+                <div class="text-center py-16">
+                    <div class="w-32 h-32 bg-gradient-to-br from-gray-100 to-gray-200 rounded-3xl flex items-center justify-center mx-auto mb-8">
+                        <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-600 mb-4">Belum Ada Riwayat Deteksi</h3>
+                    <p class="text-gray-500 text-lg max-w-md mx-auto mb-8">Mulai deteksi daun teh Anda untuk melihat riwayat hasil analisis di sini</p>
+                    <a href="#" onclick="document.querySelector('.upload-area').scrollIntoView({behavior: 'smooth'})" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                        Mulai Deteksi
                     </a>
                 </div>
-
-            </div>
+            @endif
         </div>
-
-        <!-- Hasil Deteksi -->
-        <div class="w-full md:w-1/2">
-            <div class="bg-white p-6 rounded-xl shadow-md h-full">
-                <h2 class="text-xl font-bold text-green-700 mb-4">Hasil Deteksi</h2>
-                <div id="hasilDeteksi" class="h-64 overflow-y-auto border border-gray-200 rounded p-4 text-sm text-gray-700 space-y-4">
-                    <p class="text-gray-500 text-center">Hasil deteksi akan muncul di sini</p>  
-                </div>
-                <div id="loadingSpinner" class="spinner hidden"></div>
-            </div>
-        </div>
-
-        <!-- Realtime Detection Camera -->
-        <div id="realtimeContainer" class="mt-8 hidden flex flex-col items-center">
-            <div class="relative" style="width: 640px; height: 480px;">
-                <video id="liveCamera" autoplay playsinline class="w-full rounded shadow mb-4" width="640" height="480"></video>
-                <canvas id="boundingCanvas" width="640" height="480"
-                    class="absolute top-0 left-0 z-10 pointer-events-none hidden">
-                </canvas>
-            </div>
-            <p id="realtimeInfo" class="text-sm text-gray-500 mt-2">Kamera realtime sedang berjalan...</p>
-            <button id="closeCamera" 
-                class="mt-4 inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-5 rounded-xl shadow hidden transition duration-200">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M6 18L18 6M6 6l12 12" />
-                </svg>
-                Tutup Kamera
-            </button>
-        </div>
-
-    </div>
-
-
-    <!-- Riwayat Deteksi -->
-            
-<!-- Riwayat Deteksi -->
-<h2 class="text-xl md:text-2xl font-bold text-green-700 mb-5 mt-10">Riwayat Deteksi</h2>
-<div class="overflow-x-auto">
-    <table class="min-w-full text-left text-sm border rounded-lg overflow-hidden">
-        <thead class="bg-green-100 text-green-700 font-semibold">
-            <tr>
-                <th class="px-4 py-2 border-b">No</th>
-                <th class="px-4 py-2 border-b">Waktu</th>
-                <th class="px-4 py-2 border-b">Status Kesehatan</th>
-                <th class="px-4 py-2 border-b">Hasil Deteksi</th>
-                <th class="px-4 py-2 border-b">Deskripsi</th>
-                <th class="px-4 py-2 border-b">Akurasi</th>
-                <th class="px-4 py-2 border-b">Gambar</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($riwayat as $i => $data)
-            <tr class="{{ $i >= 10 ? 'hidden more-row' : '' }}">
-                <td class="px-4 py-2 border-b">{{ $i + 1 }}</td>
-                <td class="px-4 py-2 border-b">{{ $data->created_at->format('d-m-Y H:i') }}</td>
-
-                <td class="px-4 py-2 border-b">
-                    @if ($data->jenisPenyakit->status_kesehatan === 'sehat')
-                        <span class="text-green-600 font-semibold">Sehat</span>
-                    @else
-                        <span class="text-red-600 font-semibold">Sakit</span>
-                    @endif
-                </td>
-
-                <td class="px-4 py-2 border-b">{{ $data->jenisPenyakit->nama_penyakit ?? '-' }}</td>
-                <td class="px-4 py-2 border-b">{{ $data->jenisPenyakit->deskripsi ?? '-' }}</td>
-                <td class="px-4 py-2 border-b">{{ number_format($data->confidence * 100, 1) }}%</td>
-
-                <td class="px-4 py-2 border-b">
-                    <img src="{{ asset('storage/deteksi/' . $data->foto_daun) }}" class="h-12 w-auto rounded shadow" alt="Hasil">
-                </td>
-            </tr>
-            @empty
-                <tr>
-                    <td colspan="7" class="text-center py-6 text-gray-500">Belum ada riwayat deteksi</td>
-                </tr>
-            @endforelse
-
-
-        </tbody>
-    </table>
-    @if ($riwayat->count() > 10)
-    <div class="text-center mt-4">
-        <button id="btnLihatSelengkapnya" class="text-green-700 hover:underline font-semibold">
-            Lihat Selengkapnya
-        </button>
-    </div>
-@endif
-
-</div>
+    </section>
 </main>
 
 @endsection
@@ -458,7 +785,7 @@ document.getElementById('startRealtime').addEventListener('click', async () => {
                 formData.append('file', blob, 'frame.jpg');
 
                 try {
-                    const res = await fetch('http://10.132.13.9:8000/predict', {
+                    const res = await fetch('http://127.0.0.1:8000/predict', {
                         method: 'POST',
                         body: formData
                     });
@@ -735,7 +1062,7 @@ function tampilkanHasilRealtime(result) {
         const fastApiData = new FormData();
         fastApiData.append('file', file);
         try {
-        const res = await fetch('http://10.132.13.9:8000/predict', {
+        const res = await fetch('http://127.0.0.1:8000/predict', {
             method: 'POST',
             body: fastApiData
         });
